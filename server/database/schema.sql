@@ -19,3 +19,12 @@ insert into item(id, title, user_id)
 values
   (1, "Stuff", 1),
   (2, "Doodads", 1);
+
+create table game (
+  id int unsigned primary key auto_increment not null,
+  name varchar(255) not null,
+  principle varchar(2000) not null,
+  in_room boolean DEFAULT false,
+  is_playable boolean DEFAULT false,
+  image varchar(255) null
+);
