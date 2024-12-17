@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+/*import { ReactNode } from "react";
 
 type GameData = {
   name: string;
@@ -8,3 +8,4 @@ type GameData = {
 export default function GameList() {
   return <></>;
 }
+*/
