@@ -30,7 +30,7 @@ function GameDetail() {
           <h3>Explication du jeu</h3>
           <p>{game.principle}</p>
         </figure>
-        <img src={game.image} alt={game.name} />
+        <img className="gameimg" src={game.image} alt={game.name} />
         {game.in_room === 0 ? (
           <p>Bientôt dans vos salles</p>
         ) : (
