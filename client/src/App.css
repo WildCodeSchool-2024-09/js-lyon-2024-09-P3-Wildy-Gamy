@@ -1,3 +1,14 @@
+:root {
+  --StandInBlack: #1e1e24;
+  --Accent: #92140c;
+  --StandInWhite: #fff8f0;
+  --LightBg: #ffcf99;
+  --LightBgShadow: #e5ad6f;
+  --DarkBg: #111d4a;
+  --DarkShadow: #112059;
+  --DarkShadow2: #192b70;
+}
+
 * {
   margin: 0;
   padding: 0;

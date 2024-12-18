@@ -1,0 +1,50 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+  gap: 10px;
+}
+
+body {
+  background-color: var(--StandInBlack);
+}
+
+h2,
+p {
+  color: var(--StandInWhite);
+}
+
+h3 {
+  color: var(--LightBg);
+}
+
+img {
+  width: 100%;
+  border: 3px var(--StandInWhite) solid;
+}
+
+.ensemble {
+  background-color: var(--DarkBg);
+  padding: 10px;
+  border-top: 5px var(--DarkShadow) solid;
+  border-bottom: 5px var(--DarkShadow) solid;
+  border-left: 5px var(--DarkShadow2) solid;
+  border-right: 5px var(--DarkShadow2) solid;
+}
+
+@media screen and (min-width: 720px) and (max-width: 1028px) {
+  img {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 1028px) {
+  img {
+    width: 30%;
+  }
+}
