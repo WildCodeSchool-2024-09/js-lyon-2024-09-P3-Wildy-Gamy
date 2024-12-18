@@ -1,5 +1,5 @@
-import LogoConnexion from "../../public/fantome.png";
-import LogoMenu from "../../public/manette.png";
+import LogoConnexion from "../../../public/fantome.png";
+import LogoMenu from "../../../public/manette.png";
 import "./NavBar.css";
 
 function NavBar() {

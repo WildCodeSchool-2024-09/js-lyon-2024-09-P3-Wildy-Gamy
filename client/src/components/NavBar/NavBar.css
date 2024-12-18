@@ -1,0 +1,25 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e24;
+  color: #ffcf99;
+  border-bottom: 0.3rem solid #ffcf99;
+}
+
+#menunav {
+  width: 4%;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+#connexionnav {
+  width: 3%;
+  margin-right: 1%;
+}
+
+#appname {
+  font-size: 3rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  -webkit-text-stroke: 3px #92140c;
+}
