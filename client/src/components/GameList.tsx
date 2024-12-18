@@ -4,20 +4,22 @@ interface GameListProps {
   data: {
     id: number;
     name: string;
+    principle: string;
+    in_room: number;
+    is_playable: number;
     image: string;
   };
 }
 
-export default function GameList({ data }: GameListProps) {
+function GameList({ data }: GameListProps) {
   return (
     <>
-      <div>
-        <h1>{data.name}</h1>
-        <img src={data.image} alt="" />
-        <Link to={`/api/games/${data.id}`}>
-          <button type="button">Details</button>
-        </Link>
-      </div>
+      <h2>{data.name}</h2>
+      <Link to={`/game/${data.id}`}>
+        <img className="gameimg" src={data.image} alt={data.name} />
+      </Link>
     </>
   );
 }
+
+export default GameList;
