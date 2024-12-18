@@ -1,0 +1,9 @@
+.footer-sombre {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.footer-sombre img {
+  width: 3%;
+}

@@ -23,7 +23,7 @@ h3 {
   color: var(--LightBg);
 }
 
-img {
+.gameimg {
   width: 100%;
   border: 3px var(--StandInWhite) solid;
 }
