@@ -1,4 +1,4 @@
-import pacman from "../../public/pacman.png";
+import pacman from "../../../public/pacman.png";
 import "./Footer.css";
 export default function Footer() {
   return (
