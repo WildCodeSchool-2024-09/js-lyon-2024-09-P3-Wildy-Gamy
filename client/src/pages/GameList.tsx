@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import GameList from "../components/GameList";
+import Input from "../components/Input";
 import "./GamesList.css";
 
 interface gameProps {
@@ -24,6 +25,7 @@ function GamesList() {
 
   return (
     <>
+      <Input setGames={setGames} games={games} />
       <div className="list">
         {games.length === 0 ? (
           <p>Il n'y a pas de jeux pour l'instant</p>
