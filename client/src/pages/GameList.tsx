@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import GameList from "../components/GameList";
-import Input from "../components/Input";
+import Input from "../components/Input/Input";
 import "./GamesList.css";
 
 interface gameProps {

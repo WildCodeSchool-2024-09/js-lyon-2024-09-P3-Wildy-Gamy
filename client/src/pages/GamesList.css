@@ -6,6 +6,11 @@ article {
   gap: 10px;
 }
 
+label {
+  display: flex;
+  justify-self: center;
+}
+
 .list {
   display: grid;
   grid-template-columns: 1fr;
