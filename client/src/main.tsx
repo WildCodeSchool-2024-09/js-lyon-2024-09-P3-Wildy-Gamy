@@ -4,11 +4,15 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
+import Pacman from "pacman-react";
+import { render } from "react-dom";
 
 // Import the main app component
 import App from "./App";
 import GameDetail from "./pages/GameDetail";
 import GamesList from "./pages/GameList";
+
+render(<Pacman />, document.getElementById("root"));
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -32,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/Games",
         element: <GamesList />,
+      },
+      {
+        path: "/Pacman",
+        element: <Pacman />,
       },
     ],
   },
