@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import Pacman from "pacman-react";
+import { useEffect, useState } from "react";
 import { render } from "react-dom";
 render(<Pacman />, document.getElementById("root"));
 
