@@ -10,31 +10,61 @@
   gap: 10px;
 }
 
-body {
-  background-color: var(--StandInBlack);
+.dark {
+  body {
+    background-color: var(--StandInBlack);
+  }
+
+  h2,
+  p {
+    color: var(--StandInWhite);
+  }
+
+  h3 {
+    color: var(--LightBg);
+  }
+  .ensemble {
+    background-color: var(--DarkBg);
+    padding: 10px;
+    border-top: 5px var(--DarkShadow) solid;
+    border-bottom: 5px var(--DarkShadow) solid;
+    border-left: 5px var(--DarkShadow2) solid;
+    border-right: 5px var(--DarkShadow2) solid;
+  }
 }
 
-h2,
-p {
-  color: var(--StandInWhite);
-}
+.light {
+  body {
+    background-color: var(--DarkBg);
+  }
 
-h3 {
-  color: var(--LightBg);
+  h2,
+  p {
+    color: var(--StandInWhite);
+  }
+
+  h3 {
+    color: var(--DarkBg);
+  }
+  .ensemble {
+    background-color: var(--LightBg);
+    padding: 10px;
+    border-top: 5px var(--LightBgShadow) solid;
+    border-bottom: 5px var(--LightBgShadow) solid;
+    border-left: 5px var(--LightBgShadow2) solid;
+    border-right: 5px var(--LightBgShadow2) solid;
+  }
+  .ensemble {
+    h2,
+    p {
+      color: var(--StandInBlack);
+    }
+  }
 }
 
 .gameimg {
   width: 100%;
   border: 3px var(--StandInWhite) solid;
-}
-
-.ensemble {
-  background-color: var(--DarkBg);
-  padding: 10px;
-  border-top: 5px var(--DarkShadow) solid;
-  border-bottom: 5px var(--DarkShadow) solid;
-  border-left: 5px var(--DarkShadow2) solid;
-  border-right: 5px var(--DarkShadow2) solid;
 }
 
 @media screen and (min-width: 720px) and (max-width: 1028px) {

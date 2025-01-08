@@ -49,7 +49,6 @@ function Input({ setGames }: setGamesProps) {
           }
         />
       </label>
-      ;
     </>
   );
 }

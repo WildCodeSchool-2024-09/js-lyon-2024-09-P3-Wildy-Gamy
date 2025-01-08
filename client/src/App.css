@@ -4,14 +4,28 @@
   --StandInWhite: #fff8f0;
   --LightBg: #ffcf99;
   --LightBgShadow: #e5ad6f;
+  --LightBgShadow2: #c58d4d;
   --DarkBg: #111d4a;
   --DarkShadow: #112059;
   --DarkShadow2: #192b70;
+}
+
+body {
+  min-height: 100%;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #1e1e24;
+}
+
+.dark {
+  background-color: var(--StandInBlack);
+  color: var(--StandInWhite);
+}
+
+.light {
+  background-color: var(--DarkBg);
+  color: var(--StandInBlack);
 }
