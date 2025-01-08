@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  text-align: center;
 }
 
 .footer-claire {
@@ -10,12 +11,13 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  text-align: center;
+  background-color: var(--LightBg);
+  .accent-color {
+    color: var(--Accent);
+  }
 }
-.footer-claire p {
-  color: var(--Accent);
-}
-
-footer {
+.footer-claire footer {
   padding: 10px;
 }
 

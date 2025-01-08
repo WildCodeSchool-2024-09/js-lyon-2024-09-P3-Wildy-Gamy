@@ -9,7 +9,10 @@ export default function Footer() {
       {theme === "light" ? (
         <footer className="footer-claire">
           <img src={champignon} alt="" />
-          <p>Adresse et fait par des wilders</p>
+          <p className="accent-color">
+            42 Chemin de Traverse, Villeurbanne <br />
+            contact.wildygamy@gmail.com <br /> Fait par des wilders
+          </p>
           <img src={champignon} alt="" />
         </footer>
       ) : (
@@ -17,7 +20,11 @@ export default function Footer() {
           <img src={pacman} alt="" />
           <img src={pacman} alt="" />
           <img src={pacman} alt="" />
-          <p>Adresse et fait par les Wilders</p>
+          <p>
+            42 Chemin de Traverse, Villeurbanne <br />
+            contact.wildygamy@gmail.com <br />
+            Fait par des wilders
+          </p>
           <img src={pacman} alt="" />
           <img src={pacman} alt="" />
           <img src={pacman} alt="" />
