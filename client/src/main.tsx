@@ -8,6 +8,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 
 // Import the main app component
 import App from "./App";
+import About from "./pages/About";
 import GameDetail from "./pages/GameDetail";
 import GamesList from "./pages/GameList";
 import PacmanGame from "./pages/PacmanGame";
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
         path: "/Pacman",
         element: <PacmanGame />,
       },
+      { path: "/About", element: <About /> },
     ],
   },
   // Try adding a new route! For example, "/about" with an About component
