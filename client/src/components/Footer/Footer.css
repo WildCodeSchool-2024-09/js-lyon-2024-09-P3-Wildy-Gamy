@@ -5,6 +5,20 @@
   align-items: center;
 }
 
-.footer-sombre img {
+.footer-claire {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.footer-claire p {
+  color: var(--Accent);
+}
+
+footer {
+  padding: 10px;
+}
+
+footer img {
   width: 3%;
 }
