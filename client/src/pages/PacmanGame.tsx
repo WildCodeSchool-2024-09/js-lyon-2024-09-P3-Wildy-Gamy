@@ -1,6 +1,7 @@
 import Pacman from "pacman-react";
 import { useEffect, useState } from "react";
 import { render } from "react-dom";
+import "./PacmanGame.css";
 render(<Pacman />, document.getElementById("root"));
 
 function PacmanGame() {
@@ -14,9 +15,9 @@ function PacmanGame() {
   }, []);
   const score = timeSpent * 10;
   return (
-    <div>
+    <div className="pacman">
       <Pacman />
-      <h1> Score :{score}</h1>
+      <h1 id="score"> Score :{score}</h1>
     </div>
   );
 }
