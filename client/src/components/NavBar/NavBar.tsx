@@ -7,7 +7,7 @@ import "./NavBar.css";
 function NavBar() {
   const { theme } = useTheme();
   return (
-    <nav className={`${theme}`}>
+    <nav id={`${theme}`}>
       <Menu />
       <p id="appname">WILDY GAMY</p>
       <ThemeButton />

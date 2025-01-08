@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Input.css";
+import "./SearchInput.css";
 
 interface gameProps {
   id: number;
