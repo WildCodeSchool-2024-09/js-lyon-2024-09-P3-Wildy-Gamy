@@ -10,8 +10,11 @@
   --DarkShadow2: #192b70;
 }
 
-body {
-  min-height: 100%;
+body,
+#root,
+.dark,
+.light {
+  min-height: 100vh;
 }
 
 * {
