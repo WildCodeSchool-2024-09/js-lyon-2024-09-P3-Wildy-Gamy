@@ -1,0 +1,31 @@
+.footer-sombre {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-claire {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  background-color: var(--LightBg);
+  .accent-color {
+    color: var(--Accent);
+  }
+}
+.footer-claire footer {
+  padding: 10px;
+}
+
+footer img {
+  width: 3%;
+}
+
+footer {
+  position: sticky;
+  bottom: 0;
+}
