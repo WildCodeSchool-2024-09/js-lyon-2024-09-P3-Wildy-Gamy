@@ -16,6 +16,7 @@
   }
 
   h2,
+  h4,
   p {
     color: var(--StandInWhite);
   }
@@ -60,6 +61,16 @@
       color: var(--StandInBlack);
     }
   }
+}
+
+.playButton {
+  color: var(--StandInWhite);
+  font-size: xx-large;
+  padding: 10px;
+  background-color: var(--Accent);
+  border: solid var(--LightBg) 1px;
+  border-radius: 20px;
+  box-shadow: inset 2px 2px 10px black;
 }
 
 .gameimg {

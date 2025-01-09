@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import "./GameDetail.css";
 
@@ -42,7 +42,9 @@ function GameDetail() {
           {game.is_playable === 0 ? (
             <p>Bientôt jouable en salle</p>
           ) : (
-            <p>Jouez-y dès maintenant</p>
+            <Link to={`/${game.name}`} className="playButton">
+              Jouer
+            </Link>
           )}
         </figure>
       </div>

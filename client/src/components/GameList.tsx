@@ -14,7 +14,7 @@ interface GameListProps {
 function GameList({ data }: GameListProps) {
   return (
     <>
-      <h2>{data.name}</h2>
+      <h4>{data.name}</h4>
       <Link to={`/game/${data.id}`}>
         <img className="gameimg" src={data.image} alt={data.name} />
       </Link>
