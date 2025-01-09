@@ -30,4 +30,16 @@ nav {
   div {
     color: var(--StandInBlack);
   }
+
+  div ul li a {
+    text-decoration: none;
+    color: var(--BarkBg);
+  }
+}
+
+#dark {
+  div ul li a {
+    text-decoration: none;
+    color: var(--LightBg);
+  }
 }
