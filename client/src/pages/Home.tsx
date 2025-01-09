@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ListeJeu from "../../src/assets/images/jeu.png";
+import GamePicture from "../../src/assets/images/jeu.png";
 import "./Home.css";
 
 interface gameProps {
@@ -35,7 +35,7 @@ function Home() {
           </h2>
         </article>
         <article>
-          <img src={ListeJeu} alt="" />
+          <img src={GamePicture} alt="" />
           <h2>
             <Link to="/Games">Venez voir plus de jeux</Link>
           </h2>

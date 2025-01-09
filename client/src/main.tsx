@@ -9,9 +9,9 @@ import { ThemeProvider } from "./context/ThemeContext";
 // Import the main app component
 import App from "./App";
 import About from "./pages/About";
-import Home from "./pages/Home";
 import GameDetail from "./pages/GameDetail";
 import GamesList from "./pages/GameList";
+import Home from "./pages/Home";
 import PacmanGame from "./pages/PacmanGame";
 
 // Import additional components for new routes
