@@ -9,7 +9,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 // Import the main app component
 import App from "./App";
 import About from "./pages/About";
-import Accueil from "./pages/Accueil";
+import Home from "./pages/Home";
 import GameDetail from "./pages/GameDetail";
 import GamesList from "./pages/GameList";
 import PacmanGame from "./pages/PacmanGame";
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     path: "/", // The root path
     element: <App />, // Renders the App component for the home page
     children: [
-      { path: "/", element: <Accueil /> },
+      { path: "/", element: <Home /> },
       {
         path: "/Game/:id",
         element: <GameDetail />,

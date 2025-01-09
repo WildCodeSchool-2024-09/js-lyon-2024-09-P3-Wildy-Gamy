@@ -1,11 +1,11 @@
-.accueil {
+.home {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
   margin: 15px;
 }
 
-.accueil article {
+.home article {
   display: flex;
   flex-direction: column;
   background-color: var(--LightBg);

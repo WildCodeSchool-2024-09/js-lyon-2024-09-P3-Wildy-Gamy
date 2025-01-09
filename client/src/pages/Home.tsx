@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ListeJeu from "../../src/assets/images/jeu.png";
-import "./Accueil.css";
+import "./Home.css";
 
 interface gameProps {
   id: number;
@@ -9,7 +9,7 @@ interface gameProps {
   image: string;
 }
 
-function Accueil() {
+function Home() {
   const [favGame, setFavGame] = useState<gameProps | null>(null);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/games/1`)
@@ -20,7 +20,7 @@ function Accueil() {
   }, []);
   return (
     <>
-      <section className="accueil">
+      <section className="home">
         {favGame != null && (
           <article>
             <img src={favGame.image} alt={favGame.name} />
@@ -45,4 +45,4 @@ function Accueil() {
   );
 }
 
-export default Accueil;
+export default Home;

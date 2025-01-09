@@ -23,7 +23,7 @@ export default function Menu() {
       {open === true && (
         <ul>
           <li>
-            <Link to="/Accueil">Accueil</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/About">About</Link>
