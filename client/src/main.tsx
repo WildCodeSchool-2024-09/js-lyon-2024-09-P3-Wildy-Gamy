@@ -11,6 +11,7 @@ import App from "./App";
 import About from "./pages/About";
 import GameDetail from "./pages/GameDetail";
 import GamesList from "./pages/GameList";
+import Home from "./pages/Home";
 import PacmanGame from "./pages/PacmanGame";
 
 // Import additional components for new routes
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
     path: "/", // The root path
     element: <App />, // Renders the App component for the home page
     children: [
+      { path: "/", element: <Home /> },
       {
         path: "/Game/:id",
         element: <GameDetail />,
