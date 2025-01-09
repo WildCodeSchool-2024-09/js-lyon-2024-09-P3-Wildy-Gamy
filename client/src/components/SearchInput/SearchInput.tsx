@@ -16,19 +16,19 @@ interface setGamesProps {
 }
 
 function Input({ setGames }: setGamesProps) {
-  const [listJeux, setListJeux] = useState<gameProps[]>([]);
+  const [listGames, setListGames] = useState<gameProps[]>([]);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/games`)
       .then((res) => res.json())
       .then((data) => {
-        setListJeux(data);
+        setListGames(data);
       });
   }, []);
 
   const parseInput = (input: string) => {
     const dictionnaire: gameProps[] = [];
 
-    listJeux.map((value) => {
+    listGames.map((value) => {
       if (value.name.toLowerCase().includes(input.toLowerCase())) {
         dictionnaire.push(value);
       }
