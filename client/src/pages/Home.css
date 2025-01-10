@@ -1,6 +1,6 @@
 .home {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 15px;
   margin: 15px;
 }
@@ -16,5 +16,12 @@
   }
   a {
     color: var(--StandInBlack);
+    text-decoration: underline;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .home {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
