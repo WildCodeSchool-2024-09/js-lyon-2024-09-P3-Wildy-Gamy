@@ -16,7 +16,7 @@ const read: RequestHandler = async (req, res, next) => {
     const userId = Number(req.params.id);
     const user = await usersRepository.read(userId);
 
-    if (user === null) {
+    if (user == null) {
       res.sendStatus(404);
     } else {
       res.json(user);
