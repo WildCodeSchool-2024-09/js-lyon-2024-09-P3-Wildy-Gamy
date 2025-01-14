@@ -1,25 +1,3 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
-);
-
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
-);
-
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
-
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
-
 create table game (
   id int unsigned primary key auto_increment not null,
   name varchar(255) not null,
@@ -40,4 +18,13 @@ create table lots (
   nb_lots int not null,
   nb_points_needed int not null,
   image varchar(255) null
+);
+
+create table user (
+  id int unsigned primary key auto_increment not null,
+  pseudo varchar(150) not null,
+  points int not null default 0,
+  email varchar(100) not null,
+  password varchar(100) not null,
+  image varchar(250) null
 );
