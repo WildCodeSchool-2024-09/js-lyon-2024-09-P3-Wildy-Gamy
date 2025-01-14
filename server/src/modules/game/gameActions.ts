@@ -26,7 +26,7 @@ const read: RequestHandler = async (req, res, next) => {
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
-    if (game === null) {
+    if (game == null) {
       res.sendStatus(404);
     } else {
       res.json(game);
