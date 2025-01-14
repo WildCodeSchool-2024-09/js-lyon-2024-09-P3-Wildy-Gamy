@@ -13,6 +13,7 @@ import GameDetail from "./pages/Games/GameDetail";
 import GamesList from "./pages/Games/GameList";
 import PacmanGame from "./pages/Games/PacmanGame";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import LotsList from "./pages/LotsList";
 
 // Import additional components for new routes
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       },
       { path: "/About", element: <About /> },
       { path: "/Lots", element: <LotsList /> },
+      { path: "/Login", element: <Login /> },
     ],
   },
   // Try adding a new route! For example, "/about" with an About component
