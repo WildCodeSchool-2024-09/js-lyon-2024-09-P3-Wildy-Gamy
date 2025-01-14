@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import GameList from "../components/GameList";
-import Input from "../components/SearchInput/SearchInput";
+import GameList from "../../components/GameList";
+import Input from "../../components/SearchInput/SearchInput";
 import "./GamesList.css";
 
 interface gameProps {

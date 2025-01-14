@@ -9,11 +9,12 @@ import { ThemeProvider } from "./context/ThemeContext";
 // Import the main app component
 import App from "./App";
 import About from "./pages/About";
-import GameDetail from "./pages/GameDetail";
-import GamesList from "./pages/GameList";
+import GameDetail from "./pages/Games/GameDetail";
+import GamesList from "./pages/Games/GameList";
+import PacmanGame from "./pages/Games/PacmanGame";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import LotsList from "./pages/LotsList";
-import PacmanGame from "./pages/PacmanGame";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       },
       { path: "/About", element: <About /> },
       { path: "/Lots", element: <LotsList /> },
+      { path: "/Login", element: <Login /> },
     ],
   },
   // Try adding a new route! For example, "/about" with an About component

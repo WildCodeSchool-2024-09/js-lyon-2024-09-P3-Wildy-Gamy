@@ -12,8 +12,7 @@
 
 @media screen and (max-width: 720px) {
   .pacman {
-    margin-left: 20%;
-    margin-bottom: 118px;
+    min-height: 30vh;
   }
   #score {
     margin-left: 20%;

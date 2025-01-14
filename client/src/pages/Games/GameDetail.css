@@ -17,7 +17,8 @@
 
   h2,
   h4,
-  p {
+  p,
+  label {
     color: var(--StandInWhite);
   }
 
@@ -40,7 +41,8 @@
   }
 
   h2,
-  p {
+  p,
+  label {
     color: var(--StandInWhite);
   }
 
