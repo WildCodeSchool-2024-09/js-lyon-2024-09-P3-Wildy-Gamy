@@ -22,6 +22,13 @@ router.get("/api/games/:id", gameActions.read);
 
 /* ************************************************************************* */
 
+import lotActions from "./modules/lot/lotActions";
+
+router.get("/api/lots", lotActions.browse);
+router.get("/api/lots/:id", lotActions.read);
+
+/* ************************************************************************* */
+
 import usersActions from "./modules/users/usersActions";
 
 router.get("/api/users", usersActions.browse);
