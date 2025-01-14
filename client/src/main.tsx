@@ -7,14 +7,14 @@ import { ThemeProvider } from "./context/ThemeContext";
 /* ************************************************************************* */
 
 // Import the main app component
-import Homepage from "./pages/HomePage";
 import App from "./App";
 import About from "./pages/About";
 import GameDetail from "./pages/GameDetail";
 import GamesList from "./pages/GameList";
-import Home from "./pages/Home";
-import PacmanGame from "./pages/PacmanGame";
+//·Import·the·main·app·component
+import Homepage from "./pages/HomePage";
 
+render(<Pacman />, document.getElementById("root"));
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
