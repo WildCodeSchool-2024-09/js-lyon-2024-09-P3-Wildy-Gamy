@@ -13,6 +13,8 @@ import GameDetail from "./pages/Games/GameDetail";
 import GamesList from "./pages/Games/GameList";
 import PacmanGame from "./pages/Games/PacmanGame";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import LotsList from "./pages/LotsList";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -41,6 +43,8 @@ const router = createBrowserRouter([
         element: <PacmanGame />,
       },
       { path: "/About", element: <About /> },
+      { path: "/Lots", element: <LotsList /> },
+      { path: "/Login", element: <Login /> },
       { path: "/Signup", element: <SignupForm /> },
     ],
   },
