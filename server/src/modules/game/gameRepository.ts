@@ -32,6 +32,46 @@ class gameRepository {
     // Return the array of items
     return rows as Game[];
   }
+
+  async create(game: Omit<Game, "id">) {
+    // Execute the SQL INSERT query to add a new category to the "category" table
+    const [result] = await databaseClient.query<Result>(
+      "insert into game (name, principle, in_room, is_playable, image) values (?, ?, ?, ?, ?)",
+      [game.name, game.principle, game.in_room, game.is_playable, game.image],
+    );
+
+    // Return the ID of the newly inserted item
+    return result.insertId;
+  }
+
+  async update(game: Game) {
+    // Execute the SQL UPDATE query to update an existing category in the "category" table
+    const [result] = await databaseClient.query<Result>(
+      "update game set name = ?, principle=?, in_room=?, is_playable=?, image=? where id = ?",
+      [
+        game.name,
+        game.principle,
+        game.in_room,
+        game.is_playable,
+        game.image,
+        game.id,
+      ],
+    );
+
+    // Return how many rows were affected
+    return result.affectedRows;
+  }
+
+  async delete(id: number) {
+    // Execute the SQL DELETE query to delete an existing category from the "category" table
+    const [result] = await databaseClient.query<Result>(
+      "delete from game where id = ?",
+      [id],
+    );
+
+    // Return how many rows were affected
+    return result.affectedRows;
+  }
 }
 
 export default new gameRepository();
