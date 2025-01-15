@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./SignupForm.css";
+import { useState } from "react";
+import "../pages/SignupForm.css";
 
 const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +32,6 @@ const SignupForm: React.FC = () => {
     }
 
     setError("");
-    console.log("Form submitted successfully:", formData);
   };
 
   return (
