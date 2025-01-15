@@ -31,6 +31,9 @@ export default function Menu() {
           <li>
             <Link to="/Games">Games</Link>
           </li>
+          <li>
+            <Link to="/Lots">Lots</Link>
+          </li>
           {listGames.map((game) => (
             <li key={game.id}>
               <Link to={`/Game/${game.id}`}>Page {game.name}</Link>

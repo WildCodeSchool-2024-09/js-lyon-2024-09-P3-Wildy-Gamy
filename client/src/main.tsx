@@ -5,14 +5,14 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 
 /* ************************************************************************* */
-import SignupForm from "../src/pages/SignupForm.tsx";
+import SignupForm from "../src/pages/SignupForm";
 // Import the main app component
 import App from "./App";
 import About from "./pages/About";
-import GameDetail from "./pages/GameDetail";
-import GamesList from "./pages/GameList";
+import GameDetail from "./pages/Games/GameDetail";
+import GamesList from "./pages/Games/GameList";
+import PacmanGame from "./pages/Games/PacmanGame";
 import Home from "./pages/Home";
-import PacmanGame from "./pages/PacmanGame";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -41,8 +41,7 @@ const router = createBrowserRouter([
         element: <PacmanGame />,
       },
       { path: "/About", element: <About /> },
-
-      { path: "/signup", element: <SignupForm /> },
+      { path: "/Signup", element: <SignupForm /> },
     ],
   },
 ]);

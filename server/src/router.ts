@@ -29,4 +29,9 @@ router.get("/api/lots/:id", lotActions.read);
 
 /* ************************************************************************* */
 
+import usersActions from "./modules/users/usersActions";
+
+router.get("/api/users", usersActions.browse);
+router.get("/api/users/:id", usersActions.read);
+
 export default router;

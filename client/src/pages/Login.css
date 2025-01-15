@@ -1,0 +1,28 @@
+.login_section {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  min-height: 80vh;
+  a {
+    color: var(--Accent);
+    font-weight: bold;
+  }
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 80%;
+  align-self: center;
+}
+
+@media screen and (min-width: 720px) {
+  .login {
+    width: 50%;
+    align-self: center;
+  }
+}
