@@ -22,7 +22,7 @@ function Home() {
     <>
       <section className="home">
         {favGame != null && (
-          <article>
+          <article className="jeux" id="fav">
             <img src={favGame.image} alt={favGame.name} />
             <h2>
               <Link to={`/Game/${favGame.id}`}>{favGame.name}</Link>
@@ -30,11 +30,19 @@ function Home() {
           </article>
         )}
         <article>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum
+            asperiores ullam doloribus ducimus dolore itaque rerum eius ipsum
+            est porro explicabo assumenda esse possimus incidunt pariatur quas,
+            consequuntur optio ut.
+          </p>
+        </article>
+        <article>
           <h2>
             <Link to="/About">Learn more about us</Link>
           </h2>
         </article>
-        <article>
+        <article className="jeux" id="allGames">
           <img src={GamePicture} alt="" />
           <h2>
             <Link to="/Games">Venez voir plus de jeux</Link>
