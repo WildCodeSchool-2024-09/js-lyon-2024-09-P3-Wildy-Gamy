@@ -19,6 +19,9 @@ import gameActions from "./modules/game/gameActions";
 
 router.get("/api/games", gameActions.browse);
 router.get("/api/games/:id", gameActions.read);
+router.post("/api/games", gameActions.add);
+router.put("/api/games/:id", gameActions.edit);
+router.delete("/api/games/:id", gameActions.destroy);
 
 /* ************************************************************************* */
 
