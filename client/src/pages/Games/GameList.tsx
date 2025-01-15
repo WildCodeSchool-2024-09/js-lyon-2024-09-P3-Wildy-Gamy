@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import GameList from "../../components/GameList";
 import Input from "../../components/SearchInput/SearchInput";
 import "./GamesList.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 interface gameProps {
   id: number;
@@ -26,17 +28,15 @@ function GamesList() {
   return (
     <>
       <Input setGames={setGames} games={games} />
-      <div className="list">
-        {games.length === 0 ? (
-          <p>Il n'y a pas de jeux pour l'instant</p>
-        ) : (
-          games.map((game) => (
-            <article key={game.id}>
-              <GameList data={game} />
-            </article>
-          ))
-        )}
-      </div>
+      <Carousel>
+        {games.length === 0
+          ? [<p key="">Il n'y a pas de jeux pour l'instant</p>]
+          : games.map((game) => (
+              <article className="elemCar" key={game.id}>
+                <GameList data={game} />
+              </article>
+            ))}
+      </Carousel>
     </>
   );
 }

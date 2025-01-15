@@ -27,6 +27,11 @@ a img {
   align-self: center;
 }
 
+.carousel-root {
+  width: 50%;
+  margin-left: 25%;
+}
+
 @media screen and (min-width: 720px) {
   .list {
     grid-template-columns: 1fr 1fr;
