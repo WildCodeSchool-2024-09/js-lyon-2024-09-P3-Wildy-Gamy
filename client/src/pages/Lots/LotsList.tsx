@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Lots from "../components/Lots/Lots";
+import Lots from "../../components/Lots/Lots";
 import "./LotsList.css";
 
 interface lotProps {
