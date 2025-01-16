@@ -9,6 +9,7 @@ function NavBar() {
   return (
     <nav id={`${theme}`}>
       <Menu />
+      <ThemeButton />
       <p id="appname">WILDY GAMY</p>
       <ThemeButton />
       <img id="connexionnav" src={LogoConnexion} alt="logo connexion nav" />
