@@ -32,9 +32,6 @@ body,
 }
 
 .light {
-  background: no-repeat center / 100%
-    url("https://i.pinimg.com/originals/b3/9a/6e/b39a6ecc3260548a5f6638ecc7e0facb.gif");
-  background-position: bottom;
-  background-size: cover;
-  color: var(--StandInBlack);
+  background-color: var(--StandInBlack);
+  color: var(--StandInWhite);
 }
