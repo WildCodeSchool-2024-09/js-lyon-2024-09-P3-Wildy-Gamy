@@ -24,11 +24,17 @@ body,
 }
 
 .dark {
-  background-color: var(--StandInBlack);
+  background: no-repeat center / 100%
+    url("https://i.pinimg.com/originals/3e/72/b3/3e72b311682500305a7e66444743381c.gif");
+  background-position: bottom;
+  background-size: cover;
   color: var(--StandInWhite);
 }
 
 .light {
-  background-color: var(--DarkBg);
+  background: no-repeat center / 100%
+    url("https://i.pinimg.com/originals/b3/9a/6e/b39a6ecc3260548a5f6638ecc7e0facb.gif");
+  background-position: bottom;
+  background-size: cover;
   color: var(--StandInBlack);
 }
