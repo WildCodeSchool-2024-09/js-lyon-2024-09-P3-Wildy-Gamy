@@ -29,9 +29,13 @@ body,
   background-position: bottom;
   background-size: cover;
   color: var(--StandInWhite);
+  display: flex;
+  flex-direction: column;
 }
 
 .light {
   background-color: var(--StandInBlack);
   color: var(--StandInWhite);
+  display: flex;
+  flex-direction: column;
 }

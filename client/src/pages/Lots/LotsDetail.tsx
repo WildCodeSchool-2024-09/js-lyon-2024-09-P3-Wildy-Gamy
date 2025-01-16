@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./LotsDetail.css";
 
 interface lotProps {
   id: number;

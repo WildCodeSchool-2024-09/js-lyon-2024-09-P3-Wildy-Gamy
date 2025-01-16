@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import GamePicture from "../../src/assets/images/jeu.png";
+import GamePicture from "../../src/assets/images/machine-darcade (1).png";
 import "./Home.css";
 
 interface gameProps {

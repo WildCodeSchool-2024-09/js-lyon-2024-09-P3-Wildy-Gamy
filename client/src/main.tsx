@@ -5,8 +5,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 
 /* ************************************************************************* */
-import SignupForm from "../src/pages/SignupForm";
+
 // Import the main app component
+import SignupForm from "../src/pages/SignupForm";
 import App from "./App";
 import About from "./pages/About";
 import GameDetail from "./pages/Games/GameDetail";

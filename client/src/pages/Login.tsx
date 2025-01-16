@@ -11,7 +11,9 @@ function Login() {
           <label htmlFor="password">Mot de passe</label>
           <input type="text" id="password" />
         </form>
-        <Link to="/Inscription">Inscrivez-vous</Link>
+        <Link className="playButton" to="/SignUp">
+          Inscrivez-vous
+        </Link>
       </section>
     </>
   );
