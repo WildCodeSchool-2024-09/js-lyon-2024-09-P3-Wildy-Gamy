@@ -16,6 +16,9 @@ label {
 .list {
   display: grid;
   grid-template-columns: 1fr;
+  min-height: 50vh;
+  margin-top: 5vw;
+  margin-bottom: 5vh;
 }
 
 a {
@@ -23,12 +26,18 @@ a {
   text-align: center;
 }
 
-a img {
+.lotimg {
   align-self: center;
+  height: 200px;
 }
 
 @media screen and (min-width: 720px) {
   .list {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.lotimg {
+  width: 200px;
+  border: 3px var(--StandInWhite) solid;
 }

@@ -13,7 +13,7 @@ function Lots({ data }: LotsProps) {
   return (
     <>
       <h4>{data.name}</h4>
-      <Link to={`/lots/${data.id}`}>
+      <Link to={`/lot/${data.id}`}>
         <img className="lotimg" src={data.image} alt={data.name} />
         <p> prix: {data.nb_points_needed} points</p>
       </Link>

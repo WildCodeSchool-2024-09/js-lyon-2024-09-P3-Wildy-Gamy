@@ -16,8 +16,6 @@ label {
 .list {
   display: grid;
   grid-template-columns: 1fr;
-  margin-bottom: 50vw;
-  margin-top: 10vw;
 }
 
 a {
@@ -27,16 +25,15 @@ a {
 
 a img {
   align-self: center;
-  height: 200px;
+}
+
+.carousel-root {
+  width: 50%;
+  margin-left: 25%;
 }
 
 @media screen and (min-width: 720px) {
   .list {
     grid-template-columns: 1fr 1fr;
   }
-}
-
-.lotimg {
-  width: 200px;
-  border: 3px var(--StandInWhite) solid;
 }

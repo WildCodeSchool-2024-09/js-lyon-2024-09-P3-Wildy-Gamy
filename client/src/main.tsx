@@ -5,26 +5,26 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 
 /* ************************************************************************* */
-
+import SignupForm from "../src/pages/SignupForm";
 // Import the main app component
 import App from "./App";
 import About from "./pages/About";
-import GameDetail from "./pages/GameDetail";
-import GamesList from "./pages/GameList";
+import GameDetail from "./pages/Games/GameDetail";
+import GamesList from "./pages/Games/GameList";
+import PacmanGame from "./pages/Games/PacmanGame";
 import Home from "./pages/Home";
-import LotsList from "./pages/LotsList";
-import PacmanGame from "./pages/PacmanGame";
+import Login from "./pages/Login";
+import LotDetail from "./pages/Lots/LotsDetail";
+import LotsList from "./pages/Lots/LotsList";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
-
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
 
 /* ************************************************************************* */
 
 // Create router configuration with routes
-// You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
     path: "/", // The root path
@@ -45,10 +45,16 @@ const router = createBrowserRouter([
       },
       { path: "/About", element: <About /> },
       { path: "/Lots", element: <LotsList /> },
+      { path: "/Login", element: <Login /> },
+      { path: "/Signup", element: <SignupForm /> },
+      {
+        path: "/lot/:id",
+        element: <LotDetail />,
+      },
     ],
   },
-  // Try adding a new route! For example, "/about" with an About component
 ]);
+// Import additional components for new routes
 
 /* ************************************************************************* */
 
@@ -66,28 +72,3 @@ createRoot(rootElement).render(
     </ThemeProvider>
   </StrictMode>,
 );
-
-/**
- * Helpful Notes:
- *
- * 1. Adding More Routes:
- *    To add more pages to your app, first create a new component (e.g., About.tsx).
- *    Then, import that component above like this:
- *
- *    import About from "./pages/About";
- *
- *    Add a new route to the router:
- *
- *      {
- *        path: "/about",
- *        element: <About />,  // Renders the About component
- *      }
- *
- * 2. Try Nested Routes:
- *    For more complex applications, you can nest routes. This lets you have sub-pages within a main page.
- *    Documentation: https://reactrouter.com/en/main/start/tutorial#nested-routes
- *
- * 3. Experiment with Dynamic Routes:
- *    You can create routes that take parameters (e.g., /users/:id).
- *    Documentation: https://reactrouter.com/en/main/start/tutorial#url-params-in-loaders
- */
