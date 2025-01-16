@@ -1,7 +1,6 @@
 .detail {
   display: flex;
   flex-direction: column;
-  width: 70%;
   justify-items: center;
   align-items: center;
   justify-self: center;
@@ -89,6 +88,6 @@
 
 @media screen and (min-width: 1028px) {
   .gameimg {
-    width: 50%;
+    width: 40%;
   }
 }
