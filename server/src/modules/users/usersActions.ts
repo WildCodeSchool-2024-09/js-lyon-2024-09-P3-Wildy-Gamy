@@ -26,4 +26,97 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read };
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const user = {
+      id: Number(req.params.id),
+      pseudo: req.body.pseudo,
+      email: req.body.email,
+      password: req.body.password,
+      image: req.body.image,
+    };
+
+    if (user.pseudo == null || user.email == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const affectedRows = await usersRepository.update(user);
+
+      if (affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const editPassword: RequestHandler = async (req, res, next) => {
+  try {
+    const user = {
+      id: Number(req.params.id),
+      password: req.body.password,
+    };
+
+    if (user.password == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const affectedRows = await usersRepository.updatePassword(
+        user.password,
+        user.id,
+      );
+
+      if (affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const newUser = {
+      pseudo: req.body.pseudo,
+      email: req.body.email,
+      password: req.body.password,
+      image: req.body.image,
+    };
+
+    if (
+      newUser.pseudo == null ||
+      newUser.email == null ||
+      newUser.password == null
+    ) {
+      res.sendStatus(400).json({});
+    } else {
+      const insertId = await usersRepository.create(newUser);
+
+      res.status(201).json({ insertId });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const destroy: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.id);
+
+    const affectedRows = await usersRepository.delete(userId);
+
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, edit, editPassword, add, destroy };
