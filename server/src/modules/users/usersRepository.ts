@@ -29,7 +29,7 @@ class UserRepository {
   async create(user: Omit<User, "id">) {
     // Execute the SQL INSERT query to add a new category to the "category" table
     const [result] = await databaseClient.query<Result>(
-      "insert into user (pseudo, email, password) values (?, ?, ?, ?, ?)",
+      "insert into user (pseudo, email, password) values (?, ?, ?)",
       [user.pseudo, user.email, user.password],
     );
 
@@ -40,11 +40,19 @@ class UserRepository {
   async update(user: User) {
     // Execute the SQL UPDATE query to update an existing category in the "category" table
     const [result] = await databaseClient.query<Result>(
-      "update user set pseudo = ?, email=?, password=?, image=? where id = ?",
-      [user.pseudo, user.email, user.password, user.image],
+      "update user set pseudo = ?, email=?, image=? where id = ?",
+      [user.pseudo, user.email, user.image, user.id],
     );
 
     // Return how many rows were affected
+    return result.affectedRows;
+  }
+
+  async updatePassword(password: string, id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "update user set password = ? where id = ?",
+      [password, id],
+    );
     return result.affectedRows;
   }
 

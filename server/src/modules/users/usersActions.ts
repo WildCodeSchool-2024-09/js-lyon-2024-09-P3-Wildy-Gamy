@@ -36,10 +36,36 @@ const edit: RequestHandler = async (req, res, next) => {
       image: req.body.image,
     };
 
-    if (user.pseudo == null || user.email == null || user.password == null) {
+    if (user.pseudo == null || user.email == null) {
       res.sendStatus(400).json({});
     } else {
       const affectedRows = await usersRepository.update(user);
+
+      if (affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const editPassword: RequestHandler = async (req, res, next) => {
+  try {
+    const user = {
+      id: Number(req.params.id),
+      password: req.body.password,
+    };
+
+    if (user.password == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const affectedRows = await usersRepository.updatePassword(
+        user.password,
+        user.id,
+      );
 
       if (affectedRows === 0) {
         res.sendStatus(404);
@@ -93,4 +119,4 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, edit, add, destroy };
+export default { browse, read, edit, editPassword, add, destroy };

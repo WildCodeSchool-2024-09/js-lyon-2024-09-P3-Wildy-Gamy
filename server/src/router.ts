@@ -38,6 +38,7 @@ router.get("/api/users", usersActions.browse);
 router.get("/api/users/:id", usersActions.read);
 router.post("/api/users", usersActions.add);
 router.put("api/users/:id", usersActions.edit);
+router.put("api/users/:id", usersActions.editPassword);
 router.delete("api/users/:id", usersActions.destroy);
 
 export default router;
