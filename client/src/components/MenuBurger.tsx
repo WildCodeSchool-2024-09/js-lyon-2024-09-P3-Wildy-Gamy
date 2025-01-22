@@ -2,7 +2,23 @@ import Hamburger from "hamburger-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Menu() {
+type User = {
+  id: number;
+  pseudo: string;
+  email: string;
+  is_admin: boolean;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
+interface AuthProps {
+  auth: Auth | null;
+}
+
+export default function Menu({ auth }: AuthProps) {
   const [open, setOpen] = useState(false);
   return (
     <div>
@@ -24,6 +40,11 @@ export default function Menu() {
           <li>
             <Link to="/login">Login</Link>
           </li>
+          {auth !== null && (
+            <li>
+              <Link to="/account">Account</Link>
+            </li>
+          )}
         </ul>
       )}
     </div>

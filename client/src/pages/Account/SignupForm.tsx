@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import "../pages/SignupForm.css";
+import "./SignupForm.css";
 
 import type { ChangeEventHandler, FormEventHandler } from "react";
 

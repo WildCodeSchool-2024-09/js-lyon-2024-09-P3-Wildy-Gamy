@@ -7,14 +7,17 @@ import { ThemeProvider } from "./context/ThemeContext";
 /* ************************************************************************* */
 
 // Import the main app component
-import SignupForm from "../src/pages/SignupForm";
+
 import App from "./App";
 import About from "./pages/About";
+import Account from "./pages/Account/Account";
+import Login from "./pages/Account/Login";
+import SignupForm from "./pages/Account/SignupForm";
 import GameDetail from "./pages/Games/GameDetail";
 import GamesList from "./pages/Games/GameList";
 import PacmanGame from "./pages/Games/PacmanGame";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+
 import LotDetail from "./pages/Lots/LotsDetail";
 import LotsList from "./pages/Lots/LotsList";
 
@@ -52,6 +55,7 @@ const router = createBrowserRouter([
         path: "/lot/:id",
         element: <LotDetail />,
       },
+      { path: "/account", element: <Account /> },
     ],
   },
 ]);
