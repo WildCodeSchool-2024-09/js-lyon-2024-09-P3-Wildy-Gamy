@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import type { FormEventHandler } from "react";
 
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 type User = {
   id: number;
@@ -66,20 +66,39 @@ function Login() {
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="login">
-      <div>
-        {/* Champ pour l'email */}
-        <label htmlFor="email">email</label>{" "}
-        <input ref={emailRef} type="email" id="email" />
-      </div>
-      <div>
-        {/* Champ pour le mot de passe */}
-        <label htmlFor="password">password</label>{" "}
-        <input type="password" id="password" ref={passwordRef} />
-      </div>
-      {/* Bouton de soumission du formulaire */}
-      <button type="submit">Send</button>
-    </form>
+    <section className="form-container">
+      <h2>Connection</h2>
+      <form onSubmit={handleSubmit} className="login">
+        <div>
+          {/* Champ pour l'email */}
+          <label htmlFor="email">email</label>{" "}
+          <input
+            ref={emailRef}
+            type="email"
+            id="email"
+            className="form-input"
+          />
+        </div>
+        <div>
+          {/* Champ pour le mot de passe */}
+          <label htmlFor="password">password</label>{" "}
+          <input
+            type="password"
+            id="password"
+            ref={passwordRef}
+            className="form-input"
+          />
+        </div>
+        {/* Bouton de soumission du formulaire */}
+        <button className="submit-btn" type="submit">
+          Send
+        </button>
+      </form>
+      <p>Si vous n'êtes pas encore inscrit</p>
+      <Link className="linkLogin" to="/signup">
+        Inscrivez-vous!
+      </Link>
+    </section>
   );
 }
 
