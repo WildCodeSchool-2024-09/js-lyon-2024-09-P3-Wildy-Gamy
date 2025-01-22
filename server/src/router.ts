@@ -44,6 +44,7 @@ router.delete("api/users/:id", usersActions.destroy);
 
 import authActions from "./modules/auth/authActions";
 
+router.post("/api/login", authActions.login);
 router.post("/api/users", authActions.hashPassword, usersActions.add);
 
 export default router;
