@@ -3,10 +3,11 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
 type User = {
+  is_admin: boolean;
   id: number;
   pseudo: string;
   email: string;
-  password: string;
+  hashed_password: string;
   image: string;
 };
 
@@ -26,18 +27,29 @@ class UserRepository {
     return rows as User[];
   }
 
-  async create(user: Omit<User, "id">) {
+  async readByEmailWithPassword(email: string) {
+    // Execute the SQL SELECT query to retrieve a specific user by its email
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from user where email = ?",
+      [email],
+    );
+
+    // Return the first row of the result, which represents the user
+    return rows[0] as User;
+  }
+
+  async create(user: Omit<User, "id" | "is_admin">) {
     // Execute the SQL INSERT query to add a new category to the "category" table
     const [result] = await databaseClient.query<Result>(
-      "insert into user (pseudo, email, password) values (?, ?, ?)",
-      [user.pseudo, user.email, user.password],
+      "insert into user (pseudo, email, hashed_password) values (?, ?, ?)",
+      [user.pseudo, user.email, user.hashed_password],
     );
 
     // Return the ID of the newly inserted item
     return result.insertId;
   }
 
-  async update(user: User) {
+  async update(user: Omit<User, "is_admin">) {
     // Execute the SQL UPDATE query to update an existing category in the "category" table
     const [result] = await databaseClient.query<Result>(
       "update user set pseudo = ?, email=?, image=? where id = ?",
@@ -48,10 +60,10 @@ class UserRepository {
     return result.affectedRows;
   }
 
-  async updatePassword(password: string, id: number) {
+  async updatePassword(hashed_password: string, id: number) {
     const [result] = await databaseClient.query<Result>(
-      "update user set password = ? where id = ?",
-      [password, id],
+      "update user set hashed_password = ? where id = ?",
+      [hashed_password, id],
     );
     return result.affectedRows;
   }

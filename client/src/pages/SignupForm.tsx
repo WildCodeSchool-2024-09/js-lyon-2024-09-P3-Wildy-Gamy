@@ -1,37 +1,89 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "../pages/SignupForm.css";
 
+import type { ChangeEventHandler, FormEventHandler } from "react";
+
+import { useNavigate, useOutletContext } from "react-router-dom";
+
+type User = {
+  id: number;
+  pseudo: string;
+  email: string;
+  is_admin: boolean;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
 const SignupForm: React.FC = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
-
-  const [error, setError] = useState<string>("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const { setAuth } = useOutletContext() as {
+    setAuth: (auth: Auth | null) => void;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (
-      !formData.firstName ||
-      !formData.lastName ||
-      !formData.email ||
-      !formData.password
-    ) {
-      setError("All fields are required.");
-      return;
-    }
+  const [error] = useState<string>("");
 
-    setError("");
+  const pseudoRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  // États pour le mot de passe et la confirmation du mot de passe
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  // Hook pour la navigation
+  const navigate = useNavigate();
+
+  // Gestionnaire de changement du mot de passe
+  const handlePasswordChange: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    setPassword(event.target.value);
+  };
+
+  // Gestionnaire de changement de la confirmation du mot de passe
+  const handleConfirmPasswordChange: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    setConfirmPassword(event.target.value);
+  };
+
+  // Gestionnaire de soumission du formulaire
+  const handleSubmit: FormEventHandler = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Appel à l'API pour demander une connexion
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users`,
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pseudo: (pseudoRef.current as HTMLInputElement).value,
+            email:
+              /* rendering process ensures the ref is defined before the form is submitted */
+              (emailRef.current as HTMLInputElement).value,
+            password,
+          }),
+        },
+      );
+
+      // Redirection vers la page de connexion si la création réussit
+      if (response.status === 200) {
+        const user = await response.json();
+
+        setAuth(user);
+
+        navigate("/");
+      } else {
+        // Log des détails de la réponse en cas d'échec
+        console.info(response);
+      }
+    } catch (err) {
+      // Log des erreurs possibles
+      console.error(err);
+    }
   };
 
   return (
@@ -40,42 +92,28 @@ const SignupForm: React.FC = () => {
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="Pseudo">Pseudo</label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
+            id="Pseudo"
+            name="Pseudo"
             required
-            placeholder="Your first name"
+            placeholder="Pseudo"
             className="form-input"
+            ref={pseudoRef}
           />
         </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-            placeholder="Your last name"
-            className="form-input"
-          />
-        </div>
+
         <div>
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
             required
             placeholder="Your email"
             className="form-input"
+            ref={emailRef}
           />
         </div>
         <div>
@@ -83,14 +121,27 @@ const SignupForm: React.FC = () => {
           <input
             type="password"
             id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
+            onChange={handlePasswordChange}
             required
             placeholder="Your password"
             className="form-input"
           />
+          {password.length >= 8 ? "✅" : "❌"}{" "}
+          {`length: ${password.length} >= 8`}
         </div>
+        <div>
+          {/* Champ pour la confirmation du mot de passe */}
+          <label htmlFor="confirm-password">confirm password</label>{" "}
+          <input
+            type="password"
+            id="confirm-password"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+          />{" "}
+          {/* Indicateur de correspondance avec le mot de passe */}
+          {password === confirmPassword ? "✅" : "❌"}
+        </div>
+
         <div>
           <button type="submit" className="submit-btn">
             Sign Up
