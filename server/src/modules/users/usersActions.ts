@@ -32,7 +32,7 @@ const edit: RequestHandler = async (req, res, next) => {
       id: Number(req.params.id),
       pseudo: req.body.pseudo,
       email: req.body.email,
-      password: req.body.password,
+      hashed_password: req.body.hashed_password,
       image: req.body.image,
     };
 
@@ -56,14 +56,14 @@ const editPassword: RequestHandler = async (req, res, next) => {
   try {
     const user = {
       id: Number(req.params.id),
-      password: req.body.password,
+      hashed_password: req.body.hashed_password,
     };
 
-    if (user.password == null) {
+    if (user.hashed_password == null) {
       res.sendStatus(400).json({});
     } else {
       const affectedRows = await usersRepository.updatePassword(
-        user.password,
+        user.hashed_password,
         user.id,
       );
 
@@ -83,14 +83,14 @@ const add: RequestHandler = async (req, res, next) => {
     const newUser = {
       pseudo: req.body.pseudo,
       email: req.body.email,
-      password: req.body.password,
+      hashed_password: req.body.hashed_password,
       image: req.body.image,
     };
 
     if (
       newUser.pseudo == null ||
       newUser.email == null ||
-      newUser.password == null
+      newUser.hashed_password == null
     ) {
       res.sendStatus(400).json({});
     } else {
