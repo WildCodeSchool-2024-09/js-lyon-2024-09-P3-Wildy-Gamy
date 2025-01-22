@@ -33,18 +33,18 @@ function GameDetail() {
             <h3>Explication du jeu</h3>
             <p>{game.principle}</p>
           </figure>
-          <img className="gameimg" src={game.image} alt={game.name} />
-          {game.in_room === 0 ? (
-            <p>Bientôt dans vos salles</p>
-          ) : (
-            <p>Déjà dans vos salles</p>
-          )}
           {game.is_playable === 0 ? (
             <p>Bientôt jouable en salle</p>
           ) : (
             <Link to={`/${game.name}`} className="playButton">
               Jouer
             </Link>
+          )}
+          <img className="gameimg" src={game.image} alt={game.name} />
+          {game.in_room === 0 ? (
+            <p>Bientôt dans vos salles</p>
+          ) : (
+            <p>Déjà dans vos salles</p>
           )}
         </figure>
       </div>

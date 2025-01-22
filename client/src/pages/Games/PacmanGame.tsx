@@ -8,6 +8,13 @@ function PacmanGame() {
   const [timeSpent, setTimeSpent] = useState(0);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "scroll";
+    };
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimeSpent((prevTime) => prevTime + 1);
     }, 1000);
