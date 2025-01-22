@@ -3,25 +3,9 @@ import "../pages/SignupForm.css";
 
 import type { ChangeEventHandler, FormEventHandler } from "react";
 
-import { useNavigate, useOutletContext } from "react-router-dom";
-
-type User = {
-  id: number;
-  pseudo: string;
-  email: string;
-  is_admin: boolean;
-};
-
-type Auth = {
-  user: User;
-  token: string;
-};
+import { useNavigate } from "react-router-dom";
 
 const SignupForm: React.FC = () => {
-  const { setAuth } = useOutletContext() as {
-    setAuth: (auth: Auth | null) => void;
-  };
-
   const [error] = useState<string>("");
 
   const pseudoRef = useRef<HTMLInputElement>(null);
@@ -70,12 +54,8 @@ const SignupForm: React.FC = () => {
       );
 
       // Redirection vers la page de connexion si la création réussit
-      if (response.status === 200) {
-        const user = await response.json();
-
-        setAuth(user);
-
-        navigate("/");
+      if (response.status === 201) {
+        navigate("/login");
       } else {
         // Log des détails de la réponse en cas d'échec
         console.info(response);
@@ -87,7 +67,7 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <div className="form-container">
+    <section className="form-container">
       <h2>Sign Up</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
@@ -131,12 +111,14 @@ const SignupForm: React.FC = () => {
         </div>
         <div>
           {/* Champ pour la confirmation du mot de passe */}
-          <label htmlFor="confirm-password">confirm password</label>{" "}
+          <label htmlFor="confirm-password">Confirm password</label>{" "}
           <input
             type="password"
             id="confirm-password"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
+            placeholder="Confirm your password"
+            className="form-input"
           />{" "}
           {/* Indicateur de correspondance avec le mot de passe */}
           {password === confirmPassword ? "✅" : "❌"}
@@ -148,7 +130,7 @@ const SignupForm: React.FC = () => {
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 

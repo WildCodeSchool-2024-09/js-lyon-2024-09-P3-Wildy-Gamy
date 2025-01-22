@@ -21,6 +21,9 @@ export default function Menu() {
           <li>
             <Link to="/Lots">Lots</Link>
           </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
         </ul>
       )}
     </div>
