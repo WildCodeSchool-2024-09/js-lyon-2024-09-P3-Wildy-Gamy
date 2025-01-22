@@ -57,7 +57,8 @@
   }
   .ensemble {
     h2,
-    p {
+    p,
+    h4 {
       color: var(--StandInBlack);
     }
   }

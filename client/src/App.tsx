@@ -7,8 +7,10 @@ import { useTheme } from "./context/ThemeContext";
 
 type User = {
   id: number;
+  pseudo: string;
   email: string;
   is_admin: boolean;
+  image: string;
 };
 
 type Auth = {
@@ -22,8 +24,8 @@ function App() {
   return (
     <>
       <div className={`${theme}`}>
-        <NavBar />
-        {auth && <p>Hello {auth.user.email}</p>}
+        <NavBar auth={auth} />
+        {auth && <p>Hello {auth.user.pseudo}</p>}
         <main>
           <Outlet context={{ auth, setAuth }} />
         </main>

@@ -1,0 +1,22 @@
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 20px;
+  article {
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .accountInfo {
+    article {
+      img {
+        width: 40%;
+      }
+    }
+  }
+}
