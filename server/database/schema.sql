@@ -60,7 +60,13 @@ create table scores (
   id int unsigned primary key auto_increment not null,
   id_game int unsigned not null,
   id_user int unsigned not null,
+  score int null,
   is_fav boolean default false,
   foreign key (id_game) references game(id),
   foreign key (id_user) references user(id)
 );
+
+insert into scores (id, id_game, id_user,score, is_fav)
+values
+(1,1,1,0,false),
+(2,1,2,0,false);
