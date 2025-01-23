@@ -55,3 +55,12 @@ values
 (1,"toto",0,"thomas-osana_student2024@wilder.school","123456789","https://upload.wikimedia.org/wikipedia/commons/c/c0/Z%C3%A9ro_plus_z%C3%A9ro_%C3%A9gale_la_t%C3%AAte_%C3%A0_TOTO.png", false),
 (2,"dammedanny",200,"danny@email.com","$argon2id$v=19$m=19456,t=2,p=1$lvCsh6yJXGjleWhyLPQ5qw$KJzNeLo/8Wk/kGGBpbuZfXqS6yockv6eLGLa7lJ2v3Q","https://png.pngtree.com/png-vector/20241124/ourlarge/pngtree-charming-anime-character-with-a-sweet-smile-png-image_14191640.png", true);
 -- !!! mot de passe damedanny est mdp12345
+
+create table scores (
+  id int unsigned primary key auto_increment not null,
+  id_game int unsigned not null,
+  id_user int unsigned not null,
+  is_fav boolean default false,
+  foreign key (id_game) references game(id),
+  foreign key (id_user) references user(id)
+);
