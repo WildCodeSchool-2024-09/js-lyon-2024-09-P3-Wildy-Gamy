@@ -64,3 +64,8 @@ create table scores (
   foreign key (id_game) references game(id),
   foreign key (id_user) references user(id)
 );
+
+insert into scores (id, id_game, id_user, is_fav)
+values
+(1,1,1,false),
+(2,1,2,false);
