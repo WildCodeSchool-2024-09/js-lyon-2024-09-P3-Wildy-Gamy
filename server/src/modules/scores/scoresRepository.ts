@@ -1,0 +1,29 @@
+import databaseClient from "../../../database/client";
+
+import type { Result, Rows } from "../../../database/client";
+
+type Score = {
+  id: number;
+  id_game: number;
+  id_user: number;
+  scores: number;
+  is_fav: boolean;
+};
+
+class ScoresRepository {
+  async read(id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from scores where id = ?",
+      [id],
+    );
+    return rows[0] as Score;
+  }
+
+  async readAll() {
+    const [rows] = await databaseClient.query<Rows>("select * from scores");
+
+    return rows as Score[];
+  }
+}
+
+export default new ScoresRepository();
