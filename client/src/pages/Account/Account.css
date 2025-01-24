@@ -11,12 +11,26 @@
   }
 }
 
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  a {
+    width: 90%;
+  }
+}
+
 @media screen and (min-width: 720px) {
   .accountInfo {
     article {
       img {
         width: 40%;
       }
+    }
+  }
+  .account {
+    a {
+      width: 40%;
     }
   }
 }

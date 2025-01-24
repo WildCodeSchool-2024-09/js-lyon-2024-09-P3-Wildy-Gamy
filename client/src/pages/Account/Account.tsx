@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import "./Account.css";
 
 type User = {
@@ -39,6 +39,9 @@ function Account() {
             </article>
           </section>
         )}
+        <Link className="submit-btn" to="/accountedit">
+          Modifier les informations
+        </Link>
       </section>
     </>
   );
