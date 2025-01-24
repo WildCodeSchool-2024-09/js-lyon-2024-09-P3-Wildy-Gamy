@@ -1,7 +1,6 @@
 .detail {
   display: flex;
   flex-direction: column;
-  width: 70%;
   justify-items: center;
   align-items: center;
   justify-self: center;
@@ -15,9 +14,9 @@
     background-color: var(--StandInBlack);
   }
 
-  h2,
   h4,
-  p {
+  p,
+  label {
     color: var(--StandInWhite);
   }
 
@@ -40,7 +39,8 @@
   }
 
   h2,
-  p {
+  p,
+  label {
     color: var(--StandInWhite);
   }
 
@@ -57,7 +57,8 @@
   }
   .ensemble {
     h2,
-    p {
+    p,
+    h4 {
       color: var(--StandInBlack);
     }
   }
@@ -71,6 +72,7 @@
   border: solid var(--LightBg) 1px;
   border-radius: 20px;
   box-shadow: inset 2px 2px 10px black;
+  margin-bottom: 3vh;
 }
 
 .gameimg {
@@ -86,6 +88,6 @@
 
 @media screen and (min-width: 1028px) {
   .gameimg {
-    width: 50%;
+    width: 40%;
   }
 }

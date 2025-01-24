@@ -26,6 +26,5 @@ footer img {
 }
 
 footer {
-  position: sticky;
-  bottom: 0;
+  padding: 5px;
 }

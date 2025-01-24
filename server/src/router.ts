@@ -19,7 +19,38 @@ import gameActions from "./modules/game/gameActions";
 
 router.get("/api/games", gameActions.browse);
 router.get("/api/games/:id", gameActions.read);
+router.post("/api/games", gameActions.add);
+router.put("/api/games/:id", gameActions.edit);
+router.delete("/api/games/:id", gameActions.destroy);
 
 /* ************************************************************************* */
+
+import lotActions from "./modules/lot/lotActions";
+
+router.get("/api/lots", lotActions.browse);
+router.get("/api/lots/:id", lotActions.read);
+
+/* ************************************************************************* */
+
+import usersActions from "./modules/users/usersActions";
+
+router.get("/api/users", usersActions.browse);
+router.get("/api/users/:id", usersActions.read);
+router.put("/api/users/:id", usersActions.edit);
+router.put("/api/users_password/:id", usersActions.editPassword);
+router.delete("/api/users/:id", usersActions.destroy);
+
+/* ************************************************************************* */
+import scoresActions from "./modules/scores/scoresActions";
+
+router.get("/api/scores", scoresActions.browse);
+router.get("/api/scores/:id", scoresActions.read);
+
+/* ************************************************************************* */
+
+import authActions from "./modules/auth/authActions";
+
+router.post("/api/login", authActions.login);
+router.post("/api/users", authActions.hashPassword, usersActions.add);
 
 export default router;

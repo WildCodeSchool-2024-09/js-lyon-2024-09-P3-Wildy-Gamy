@@ -4,14 +4,36 @@ import Menu from "../MenuBurger";
 import ThemeButton from "../Theme/ThemeButton";
 import "./NavBar.css";
 
-function NavBar() {
+type User = {
+  id: number;
+  pseudo: string;
+  email: string;
+  is_admin: boolean;
+  image: string;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
+interface AuthProps {
+  auth: Auth | null;
+}
+
+function NavBar({ auth }: AuthProps) {
   const { theme } = useTheme();
   return (
     <nav id={`${theme}`}>
-      <Menu />
+      <Menu auth={auth} />
+      <ThemeButton />
       <p id="appname">WILDY GAMY</p>
       <ThemeButton />
-      <img id="connexionnav" src={LogoConnexion} alt="logo connexion nav" />
+      {auth === null ? (
+        <img id="connexionnav" src={LogoConnexion} alt="logo connexion nav" />
+      ) : (
+        <img id="connexionnav" src={auth.user.image} alt="user profile" />
+      )}
     </nav>
   );
 }

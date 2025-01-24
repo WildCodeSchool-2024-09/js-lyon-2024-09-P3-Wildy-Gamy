@@ -1,22 +1,25 @@
 import Hamburger from "hamburger-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-interface gameProps {
+type User = {
   id: number;
-  name: string;
+  pseudo: string;
+  email: string;
+  is_admin: boolean;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
+interface AuthProps {
+  auth: Auth | null;
 }
 
-export default function Menu() {
+export default function Menu({ auth }: AuthProps) {
   const [open, setOpen] = useState(false);
-  const [listGames, setListGames] = useState<gameProps[]>([]);
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/games`)
-      .then((res) => res.json())
-      .then((data) => {
-        setListGames(data);
-      });
-  }, []);
   return (
     <div>
       <Hamburger size={28} toggled={open} toggle={setOpen} />
@@ -31,11 +34,17 @@ export default function Menu() {
           <li>
             <Link to="/Games">Games</Link>
           </li>
-          {listGames.map((game) => (
-            <li key={game.id}>
-              <Link to={`/Game/${game.id}`}>Page {game.name}</Link>
+          <li>
+            <Link to="/Lots">Lots</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          {auth !== null && (
+            <li>
+              <Link to="/account">Account</Link>
             </li>
-          ))}
+          )}
         </ul>
       )}
     </div>

@@ -26,7 +26,7 @@ const read: RequestHandler = async (req, res, next) => {
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
-    if (game === null) {
+    if (game == null) {
       res.sendStatus(404);
     } else {
       res.json(game);
@@ -37,4 +37,69 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read };
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const game = {
+      id: Number(req.params.id),
+      name: req.body.name,
+      principle: req.body.principle,
+      in_room: req.body.in_room,
+      is_playable: req.body.is_playable,
+      image: req.body.image,
+    };
+
+    if (game.name == null || game.principle == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const affectedRows = await gameRepository.update(game);
+
+      if (affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const newGame = {
+      name: req.body.name,
+      principle: req.body.principle,
+      in_room: Number(req.body.in_room),
+      is_playable: Number(req.body.is_playable),
+      image: req.body.image,
+    };
+
+    if (newGame.name == null || newGame.principle == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const insertId = await gameRepository.create(newGame);
+
+      res.status(201).json({ insertId });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const destroy: RequestHandler = async (req, res, next) => {
+  try {
+    const gameId = Number(req.params.id);
+
+    const affectedRows = await gameRepository.delete(gameId);
+
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, edit, add, destroy };

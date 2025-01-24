@@ -1,19 +1,15 @@
 .pacman {
-  margin: 0vw 20vw 0vw 20vw;
+  margin: 5vw 20vw 0vw 20vw;
 }
 
 #score {
   margin: 0vw 0vw 27vw 0vw;
-}
-
-#score {
   color: white;
 }
 
 @media screen and (max-width: 720px) {
   .pacman {
-    margin-left: 20%;
-    margin-bottom: 118px;
+    min-height: 30vh;
   }
   #score {
     margin-left: 20%;
