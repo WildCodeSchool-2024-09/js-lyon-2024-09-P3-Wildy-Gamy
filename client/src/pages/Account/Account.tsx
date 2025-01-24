@@ -1,5 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import "./Account.css";
+import { useNavigate } from "react-router-dom";
 
 type User = {
   id: number;
@@ -20,6 +21,33 @@ interface AuthProps {
 
 function Account() {
   const { auth } = useOutletContext<AuthProps>();
+  const navigate = useNavigate();
+  const myDataObject = { userId: auth?.user.id };
+
+  const handleDelete = async () => {
+    console.info(auth?.user.id);
+    console.info(myDataObject);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/${auth?.user.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(myDataObject),
+        },
+      );
+      if (response.status === 204) {
+        navigate("/login");
+      } else {
+        console.info(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <section className="account">
@@ -39,6 +67,9 @@ function Account() {
             </article>
           </section>
         )}
+        <button className="button-24" type="button" onClick={handleDelete}>
+          Supprimer compte
+        </button>
       </section>
     </>
   );

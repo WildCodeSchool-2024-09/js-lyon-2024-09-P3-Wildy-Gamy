@@ -38,7 +38,7 @@ router.get("/api/users", usersActions.browse);
 router.get("/api/users/:id", usersActions.read);
 router.put("api/users/:id", usersActions.edit);
 router.put("api/users/:id", usersActions.editPassword);
-router.delete("api/users/:id", usersActions.destroy);
+router.delete("/api/users/:id", usersActions.destroy);
 
 /* ************************************************************************* */
 import scoresActions from "./modules/scores/scoresActions";
