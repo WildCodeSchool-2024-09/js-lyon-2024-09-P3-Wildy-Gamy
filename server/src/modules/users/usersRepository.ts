@@ -49,15 +49,14 @@ class UserRepository {
     return result.insertId;
   }
 
-  async update(user: Omit<User, "is_admin">) {
-    // Execute the SQL UPDATE query to update an existing category in the "category" table
-    const [result] = await databaseClient.query<Result>(
-      "update user set pseudo = ?, email=?, image=? where id = ?",
+  async update(user: Omit<User, "is_admin" | "hashed_password">) {
+    const [rows] = await databaseClient.query<Rows>(
+      "update user set pseudo = ?, email = ?, image = ? where id = ?",
       [user.pseudo, user.email, user.image, user.id],
     );
 
     // Return how many rows were affected
-    return result.affectedRows;
+    return rows[0] as User;
   }
 
   async updatePassword(hashed_password: string, id: number) {

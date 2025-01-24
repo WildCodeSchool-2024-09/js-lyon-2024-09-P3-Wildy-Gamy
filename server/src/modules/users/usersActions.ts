@@ -1,3 +1,4 @@
+import { log } from "node:console";
 import type { RequestHandler } from "express";
 import usersRepository from "./usersRepository";
 
@@ -29,10 +30,9 @@ const read: RequestHandler = async (req, res, next) => {
 const edit: RequestHandler = async (req, res, next) => {
   try {
     const user = {
-      id: Number(req.params.id),
+      id: Number.parseInt(req.params.id),
       pseudo: req.body.pseudo,
       email: req.body.email,
-      hashed_password: req.body.hashed_password,
       image: req.body.image,
     };
 
@@ -41,10 +41,10 @@ const edit: RequestHandler = async (req, res, next) => {
     } else {
       const affectedRows = await usersRepository.update(user);
 
-      if (affectedRows === 0) {
+      if (affectedRows === null) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.json(user);
       }
     }
   } catch (err) {

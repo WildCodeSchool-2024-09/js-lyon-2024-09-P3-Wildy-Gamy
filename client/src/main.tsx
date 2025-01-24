@@ -11,6 +11,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import App from "./App";
 import About from "./pages/About";
 import Account from "./pages/Account/Account";
+import AccountEdit from "./pages/Account/AccountModify";
 import Login from "./pages/Account/Login";
 import SignupForm from "./pages/Account/SignupForm";
 import GameDetail from "./pages/Games/GameDetail";
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
         element: <LotDetail />,
       },
       { path: "/account", element: <Account /> },
+      { path: "/accountedit", element: <AccountEdit /> },
     ],
   },
 ]);
