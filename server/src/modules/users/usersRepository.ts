@@ -70,7 +70,7 @@ class UserRepository {
   async delete(id: number) {
     // Execute the SQL DELETE query to delete an existing category from the "category" table
     const [result] = await databaseClient.query<Result>(
-      "delete user game where id = ?",
+      "delete from user where id = ?",
       [id],
     );
 

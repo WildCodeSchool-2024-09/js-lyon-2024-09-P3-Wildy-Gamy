@@ -1,4 +1,3 @@
-import { log } from "node:console";
 import type { RequestHandler } from "express";
 import usersRepository from "./usersRepository";
 
@@ -105,8 +104,7 @@ const add: RequestHandler = async (req, res, next) => {
 
 const destroy: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.params.id);
-
+    const userId = Number.parseInt(req.params.id);
     const affectedRows = await usersRepository.delete(userId);
 
     if (affectedRows === 0) {
