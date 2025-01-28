@@ -24,6 +24,14 @@ class ScoresRepository {
 
     return rows as Score[];
   }
+
+  async updateScores(newScore: number, id_user: number) {
+    const [result] = await databaseClient.query<Result>(
+      "update scores set score = ? where id_user = ?",
+      [newScore, id_user],
+    );
+    return result.affectedRows;
+  }
 }
 
 export default new ScoresRepository();

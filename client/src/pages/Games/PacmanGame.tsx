@@ -1,10 +1,33 @@
 import Pacman from "pacman-react";
 import { useEffect, useState } from "react";
 import { render } from "react-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./PacmanGame.css";
 render(<Pacman />, document.getElementById("root"));
 
+type User = {
+  id: number;
+  id_user: number;
+  pseudo: string;
+  email: string;
+  is_admin: boolean;
+  image: string;
+  newScore: number;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
+interface AuthProps {
+  auth: Auth | null;
+}
+
 function PacmanGame() {
+  const { auth } = useOutletContext<AuthProps>();
+  const id_user = auth?.user.id;
+  const navigate = useNavigate();
   const [timeSpent, setTimeSpent] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
 
@@ -30,11 +53,40 @@ function PacmanGame() {
 
     return () => clearInterval(interval);
   }, [isGameOver]);
-  const score = timeSpent * 10;
+  const newScore = timeSpent * 10;
+
+  const handleScore = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/scores/${id_user}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id_user: id_user,
+            newScore: newScore,
+          }),
+        },
+      );
+      if (response.status === 204) {
+        navigate("/PacMan");
+      } else {
+        console.info(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="pacman">
       <Pacman />
-      <h1 id="score"> Score :{score}</h1>
+      <h1 id="score"> Score :{newScore}</h1>
+      <button className="button-89" type="button" onClick={handleScore}>
+        Enregistrer Score
+      </button>
     </div>
   );
 }
