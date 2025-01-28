@@ -37,7 +37,6 @@ import usersActions from "./modules/users/usersActions";
 router.get("/api/users", usersActions.browse);
 router.get("/api/users/:id", usersActions.read);
 router.put("/api/users/:id", usersActions.edit);
-router.put("/api/users_password/:id", usersActions.editPassword);
 router.delete("/api/users/:id", usersActions.destroy);
 
 /* ************************************************************************* */
@@ -52,5 +51,7 @@ import authActions from "./modules/auth/authActions";
 
 router.post("/api/login", authActions.login);
 router.post("/api/users", authActions.hashPassword, usersActions.add);
+
+router.put("/api/users_password/:id", usersActions.editPassword);
 
 export default router;
