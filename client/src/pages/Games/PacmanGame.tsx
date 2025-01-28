@@ -6,6 +6,7 @@ render(<Pacman />, document.getElementById("root"));
 
 function PacmanGame() {
   const [timeSpent, setTimeSpent] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -15,11 +16,20 @@ function PacmanGame() {
   }, []);
 
   useEffect(() => {
+    if (isGameOver) return;
+
     const interval = setInterval(() => {
-      setTimeSpent((prevTime) => prevTime + 1);
+      const gameOverElement = document.querySelector(".game-over");
+
+      if (gameOverElement) {
+        setIsGameOver(true);
+      } else {
+        setTimeSpent((prevTime) => prevTime + 1);
+      }
     }, 1000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [isGameOver]);
   const score = timeSpent * 10;
   return (
     <div className="pacman">
