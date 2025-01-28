@@ -1,4 +1,6 @@
+import argon2 from "argon2";
 import type { RequestHandler } from "express";
+import { hashingOptions } from "../auth/authActions";
 import usersRepository from "./usersRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -54,22 +56,44 @@ const edit: RequestHandler = async (req, res, next) => {
 const editPassword: RequestHandler = async (req, res, next) => {
   try {
     const user = {
-      id: Number(req.params.id),
-      hashed_password: req.body.hashed_password,
+      id: Number.parseInt(req.params.id),
+      password: req.body.password,
+      newPassword: req.body.newPassword,
+      email: req.body.email,
     };
+    const userInfo = await usersRepository.readByEmailWithPassword(
+      req.body.email,
+    );
 
-    if (user.hashed_password == null) {
+    const hashed_password = await argon2.hash(user.password, hashingOptions);
+    req.body.password = undefined;
+
+    const new_hashed_password = await argon2.hash(
+      user.newPassword,
+      hashingOptions,
+    );
+    req.body.newPassword = undefined;
+
+    if (hashed_password == null) {
       res.sendStatus(400).json({});
     } else {
-      const affectedRows = await usersRepository.updatePassword(
-        user.hashed_password,
-        user.id,
+      const verified = await argon2.verify(
+        userInfo.hashed_password,
+        user.password,
       );
 
-      if (affectedRows === 0) {
-        res.sendStatus(404);
+      if (verified) {
+        const affectedRows = await usersRepository.updatePassword(
+          new_hashed_password,
+          user.id,
+        );
+        if (affectedRows === 0) {
+          res.json({ errorNumber: 404, error: "Utilisateur non trouvé" });
+        } else {
+          res.json({ message: "Mot de passe mis à jour avec succès" });
+        }
       } else {
-        res.sendStatus(204);
+        res.sendStatus(422);
       }
     }
   } catch (err) {
