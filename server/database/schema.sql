@@ -69,7 +69,16 @@ create table scores (
 insert into scores (id, id_game, id_user,score, is_fav)
 values
 (1,1,1,0,false),
-(2,1,2,0,false);
+(2,1,2,0,false),
+(3,2,2,0,false),
+(4,3,2,400,false),
+(5,4,2,0,false),
+(6,5,2,0,false),
+(7,6,2,0,false),
+(8,7,2,0,false),
+(9,8,2,0,false),
+(10,9,2,0,false),
+(11,10,2,0,false);
 
 create table exchanges (
   id int unsigned primary key auto_increment not null,

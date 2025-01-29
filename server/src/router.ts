@@ -44,6 +44,9 @@ import scoresActions from "./modules/scores/scoresActions";
 
 router.get("/api/scores", scoresActions.browse);
 router.get("/api/scores/:id", scoresActions.read);
+router.get("/api/favorite", scoresActions.readFav);
+router.get("/api/allfavorites", scoresActions.readAllFav);
+router.put("/api/favorite", scoresActions.editFav);
 
 /* ************************************************************************* */
 
