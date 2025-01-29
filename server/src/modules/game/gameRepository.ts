@@ -72,6 +72,14 @@ class gameRepository {
     // Return how many rows were affected
     return result.affectedRows;
   }
+
+  async readScores(id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      "select user.id, game.name as game, scores.score from scores join game on scores.id_game = game.id join user on scores.id_user = user.id where scores.id_user = ?",
+      [id],
+    );
+    return rows;
+  }
 }
 
 export default new gameRepository();
