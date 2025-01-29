@@ -7,6 +7,16 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Define item-related routes
+
+import exchangesActions from "./modules/exchanges/exchangesActions";
+
+router.get("/api/exchanges", exchangesActions.browse);
+router.get("/api/exchanges/:id", exchangesActions.read);
+router.post("/api/exchanges", exchangesActions.add);
+router.delete("/api/exchanges/:id", exchangesActions.destroy);
+
+// ************************************************************************* */
+
 import itemActions from "./modules/item/itemActions";
 
 router.get("/api/items", itemActions.browse);
