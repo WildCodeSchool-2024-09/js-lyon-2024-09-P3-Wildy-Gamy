@@ -27,6 +27,7 @@ interface AuthProps {
 function PacmanGame() {
   const { auth } = useOutletContext<AuthProps>();
   const id_user = auth?.user.id;
+  const id_game = 1;
   const navigate = useNavigate();
   const [timeSpent, setTimeSpent] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -67,11 +68,34 @@ function PacmanGame() {
           body: JSON.stringify({
             id_user: id_user,
             newScore: newScore,
+            id_game: id_game,
           }),
         },
       );
+
       if (response.status === 204) {
-        navigate("/PacMan");
+        navigate("/Games");
+      } else if (response.status === 404) {
+        const newResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/scores`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id_user: id_user,
+              id_game: id_game,
+              score: newScore,
+            }),
+          },
+        );
+
+        if (newResponse.ok) {
+          navigate("/Games");
+        } else {
+          console.info(newResponse);
+        }
       } else {
         console.info(response);
       }
@@ -82,11 +106,11 @@ function PacmanGame() {
 
   return (
     <div className="pacman">
-      <Pacman />
-      <h1 id="score"> Score :{newScore}</h1>
-      <button className="button-89" type="button" onClick={handleScore}>
+      <button className="button-74" type="button" onClick={handleScore}>
         Enregistrer Score
       </button>
+      <Pacman />
+      <h1 id="score"> Score :{newScore}</h1>
     </div>
   );
 }
