@@ -54,6 +54,8 @@ import scoresActions from "./modules/scores/scoresActions";
 
 router.get("/api/scores", scoresActions.browse);
 router.get("/api/scores/:id", scoresActions.read);
+router.put("/api/scores/:id", scoresActions.editScores);
+router.post("/api/scores", scoresActions.addScore);
 
 /* ************************************************************************* */
 
