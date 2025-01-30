@@ -14,8 +14,8 @@ const browse: RequestHandler = async (req, res, next) => {
 const readFav: RequestHandler = async (req, res, next) => {
   try {
     const ids = {
-      id_game: Number(req.body.id_game),
-      id_user: Number(req.body.id_user),
+      id_game: Number.parseInt(req.query.id_game as string),
+      id_user: Number.parseInt(req.query.id_user as string),
     };
 
     if (ids.id_game == null || ids.id_user == null) {
@@ -32,14 +32,12 @@ const readFav: RequestHandler = async (req, res, next) => {
 
 const readAllFav: RequestHandler = async (req, res, next) => {
   try {
-    const ids = {
-      id_user: Number(req.body.id_user),
-    };
+    const id = Number(req.body.id_user);
 
-    if (ids.id_user == null) {
+    if (id == null) {
       res.sendStatus(400).json({});
     } else {
-      const fav = await scoresRepository.readAllFav(ids.id_user);
+      const fav = await scoresRepository.readAllFav(id);
 
       res.json(fav);
     }
@@ -50,21 +48,21 @@ const readAllFav: RequestHandler = async (req, res, next) => {
 
 const editFav: RequestHandler = async (req, res, next) => {
   try {
-    const user = {
+    const score = {
+      is_fav: Boolean(req.body.is_fav),
       id_game: Number(req.body.id_game),
       id_user: Number(req.body.id_user),
-      is_fav: Boolean(req.body.is_fav),
     };
 
-    if (user.id_game == null || user.id_user == null) {
+    if (score.id_game == null || score.id_user == null) {
       res.sendStatus(400).json({});
     } else {
-      const affectedRows = await scoresRepository.updateFav(user);
+      const affectedRows = await scoresRepository.updateFav(score);
 
       if (affectedRows == null) {
         res.sendStatus(404);
       } else {
-        res.json(user);
+        res.sendStatus(201);
       }
     }
   } catch (err) {
@@ -113,6 +111,27 @@ const editScores: RequestHandler = async (req, res, next) => {
   }
 };
 
+const addScoreStart: RequestHandler = async (req, res, next) => {
+  try {
+    for (let i = 1; i <= 10; i++) {
+      const newScore = {
+        id_user: req.body.id_user,
+        id_game: i,
+        score: 0,
+      };
+
+      if (newScore.id_user == null) {
+        res.sendStatus(400).json({});
+      } else {
+        const insertId = await scoresRepository.createAll(newScore);
+      }
+      res.status(201);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const addScore: RequestHandler = async (req, res, next) => {
   try {
     const newScore = {
@@ -144,4 +163,5 @@ export default {
   editFav,
   editScores,
   addScore,
+  addScoreStart,
 };

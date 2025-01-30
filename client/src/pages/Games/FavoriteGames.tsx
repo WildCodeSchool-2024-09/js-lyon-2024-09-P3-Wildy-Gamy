@@ -1,57 +1,89 @@
-// import { useEffect, useState } from "react";
-// import GameList from "../../components/GameList";
-// import "./GamesList.css";
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from "react-responsive-carousel";
+import { useEffect, useState } from "react";
+import GameList from "../../components/GameList";
+import "./GamesList.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import { useOutletContext } from "react-router-dom";
 
-// interface gameProps {
-//   id: number;
-//   name: string;
-//   principle: string;
-//   in_room: number;
-//   is_playable: number;
-//   image: string;
-// }
+type User = {
+  id: number;
+  pseudo: string;
+  email: string;
+  is_admin: boolean;
+  image: string;
+};
 
-// interface favGames {
-//   list: [idGame: number];
-// }
+type Auth = {
+  user: User;
+  token: string;
+};
 
-// function FavoritesList() {
-//   const [games, setGames] = useState([] as [] | gameProps[]);
-//   const [favorites, setFavorites] = useState([] as [] | favGames);
+interface AuthProps {
+  auth: Auth | null;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
+}
 
-//   useEffect(() => {
-//     fetch(`${import.meta.env.VITE_API_URL}/api/allfavorites`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         setFavorites(data);
-//       });
-//   }, []);
+interface gameProps {
+  id: number;
+  name: string;
+  principle: string;
+  in_room: number;
+  is_playable: number;
+  image: string;
+}
 
-//   //   favorites.map((id: number) => {
-//   //     useEffect(() => {
-//   //       fetch(`${import.meta.env.VITE_API_URL}/api/games/${id}`)
-//   //         .then((response) => response.json())
-//   //         .then((data) => {
-//   //           setGames(data);
-//   //         });
-//   //     }, []);
-//   //   });
+interface favGames {
+  list: [idGame: number];
+}
 
-//   return (
-//     <>
-//       <Carousel>
-//         {games.length === 0
-//           ? [<p key="">Il n'y a pas de jeux pour l'instant</p>]
-//           : games.map((game) => (
-//               <article className="elemCar" key={game.id}>
-//                 <GameList data={game} />
-//               </article>
-//             ))}
-//       </Carousel>
-//     </>
-//   );
-// }
+function FavoritesList() {
+  const { auth } = useOutletContext<AuthProps>();
+  const [games, setGames] = useState([] as [] | gameProps[]);
+  const [favorites, setFavorites] = useState([] as [] | favGames[]);
 
-// export default FavoritesList;
+  if (auth != null && auth.user.id !== null) {
+    useEffect(() => {
+      fetch(`${import.meta.env.VITE_API_URL}/api/allfavorites`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(auth?.user.id),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setFavorites(data);
+        });
+    }, [auth?.user.id]);
+  }
+
+  if (favorites.length > 0) {
+    favorites.map((id) => {
+      useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_URL}/api/games/${id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            setGames(data);
+          });
+      }, [id]);
+    });
+  }
+
+  return (
+    <>
+      {games.length === 0 ? (
+        <p key="">Pas encore de jeux dans vos favoris</p>
+      ) : (
+        <Carousel>
+          {games.map((game) => (
+            <article className="elemCar" key={game.id}>
+              <GameList data={game} />
+            </article>
+          ))}
+        </Carousel>
+      )}
+    </>
+  );
+}
+
+export default FavoritesList;

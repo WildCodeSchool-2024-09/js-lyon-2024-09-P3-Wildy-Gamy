@@ -1,7 +1,25 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import "./GameDetail.css";
+
+type User = {
+  id: number;
+  pseudo: string;
+  email: string;
+  is_admin: boolean;
+  image: string;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
+interface AuthProps {
+  auth: Auth | null;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
+}
 
 interface gameProps {
   id: number;
@@ -13,9 +31,11 @@ interface gameProps {
 }
 
 function GameDetail() {
+  const { auth } = useOutletContext<AuthProps>();
   const { theme } = useTheme();
   const { id } = useParams();
   const [game, setGame] = useState(null as null | gameProps);
+  const [fav, setFav] = useState(false as boolean);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/games/${id}`)
@@ -24,6 +44,34 @@ function GameDetail() {
         setGame(data);
       });
   }, [id]);
+
+  const params = new URLSearchParams({
+    id_game: `${game?.id}`,
+    id_user: `${auth?.user.id}`,
+  }).toString();
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/favorite?${params}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setFav(data);
+      });
+  }, [params]);
+
+  const HandleClick = () => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/favorite`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        is_fav: fav,
+        id_game: game?.id,
+        id_user: auth?.user.id,
+      }),
+    });
+    setFav(!fav);
+  };
+
   return (
     game && (
       <div className={`${theme}`}>
@@ -39,6 +87,21 @@ function GameDetail() {
             <Link to={`/${game.name}`} className="playButton">
               Jouer
             </Link>
+          )}
+          {auth != null && fav === true ? (
+            <section>
+              <p>Un de vos jeux favoris!</p>
+              <button type="button" onClick={HandleClick}>
+                <img src="" alt="full heart" />
+              </button>
+            </section>
+          ) : (
+            <section>
+              <p>Ce jeu ne fait pas parti de vos favoris.</p>
+              <button type="button" onClick={HandleClick}>
+                <img src="" alt="empty heart" />
+              </button>
+            </section>
           )}
           <img className="gameimg" src={game.image} alt={game.name} />
           {game.in_room === 0 ? (
