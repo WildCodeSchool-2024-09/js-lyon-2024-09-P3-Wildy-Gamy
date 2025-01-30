@@ -70,3 +70,16 @@ insert into scores (id, id_game, id_user,score, is_fav)
 values
 (1,1,1,0,false),
 (2,1,2,0,false);
+
+create table exchanges (
+  id int unsigned primary key auto_increment not null,
+  id_lots int unsigned not null,
+  id_user int unsigned not null,
+  foreign key (id_lots) references lots(id),
+  foreign key (id_user) references user(id)
+);
+
+insert into exchanges (id, id_lots, id_user)
+values
+(1,1,1),
+(2,4,2);

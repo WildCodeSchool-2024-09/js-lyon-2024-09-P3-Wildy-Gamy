@@ -26,4 +26,53 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read };
+const editScores: RequestHandler = async (req, res, next) => {
+  try {
+    const score = {
+      id_user: Number(req.params.id),
+      newScore: Number(req.body.newScore),
+      id_game: Number(req.body.id_game),
+    };
+    if (score.newScore == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const affectedRows = await scoresRepository.updateScores(
+        score.newScore,
+        score.id_user,
+        score.id_game,
+      );
+      if (affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const addScore: RequestHandler = async (req, res, next) => {
+  try {
+    const newScore = {
+      id_user: req.body.id_user,
+      id_game: req.body.id_game,
+      score: req.body.score,
+    };
+
+    if (
+      newScore.id_user == null ||
+      newScore.id_game == null ||
+      newScore.score == null
+    ) {
+      res.sendStatus(400).json({});
+    } else {
+      const insertId = await scoresRepository.create(newScore);
+      res.status(201).json({ insertId });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, editScores, addScore };
