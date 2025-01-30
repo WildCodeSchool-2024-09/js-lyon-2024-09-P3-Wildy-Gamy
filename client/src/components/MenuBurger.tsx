@@ -37,9 +37,11 @@ export default function Menu({ auth }: AuthProps) {
           <li>
             <Link to="/Lots">Lots</Link>
           </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
+          {auth === null && (
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          )}
           {auth !== null && (
             <li>
               <Link to="/account">Account</Link>

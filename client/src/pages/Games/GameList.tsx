@@ -48,7 +48,13 @@ function GamesList() {
   return (
     <>
       <Input setGames={setGames} games={games} />
-      {auth && <Link to="/favorites">Lien vers vos jeux favoris!</Link>}
+      {auth && (
+        <figure className="linkTo">
+          <Link className="ensemble" id="toListFav" to="/favorites">
+            Lien vers vos jeux favoris!
+          </Link>
+        </figure>
+      )}
       <Carousel>
         {games.length === 0
           ? [<p key="">Il n'y a pas de jeux pour l'instant</p>]
