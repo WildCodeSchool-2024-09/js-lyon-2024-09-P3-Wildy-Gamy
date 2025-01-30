@@ -66,10 +66,19 @@ create table scores (
   foreign key (id_user) references user(id)
 );
 
-insert into scores (id, id_game, id_user,score, is_fav)
+insert into scores (id_game, id_user,score, is_fav)
 values
-(1,1,1,0,false),
-(2,1,2,0,false);
+(1,1,0,false),
+(1,2,0,false),
+(2,2,0,false),
+(3,2,400,false),
+(4,2,0,false),
+(5,2,0,false),
+(6,2,0,true),
+(7,2,0,true),
+(8,2,0,false),
+(9,2,0,false),
+(10,2,0,false);
 
 create table exchanges (
   id int unsigned primary key auto_increment not null,
