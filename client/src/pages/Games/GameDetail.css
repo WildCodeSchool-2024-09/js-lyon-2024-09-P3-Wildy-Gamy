@@ -20,7 +20,8 @@
     color: var(--StandInWhite);
   }
 
-  h3 {
+  h3,
+  a {
     color: var(--LightBg);
   }
   .ensemble {
@@ -44,7 +45,8 @@
     color: var(--StandInWhite);
   }
 
-  h3 {
+  h3,
+  a {
     color: var(--DarkBg);
   }
   .ensemble {
