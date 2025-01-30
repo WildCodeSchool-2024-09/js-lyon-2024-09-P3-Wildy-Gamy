@@ -32,6 +32,7 @@ router.get("/api/games/:id", gameActions.read);
 router.post("/api/games", gameActions.add);
 router.put("/api/games/:id", gameActions.edit);
 router.delete("/api/games/:id", gameActions.destroy);
+router.get("/api/gamesScores/:id", gameActions.readScores);
 
 /* ************************************************************************* */
 

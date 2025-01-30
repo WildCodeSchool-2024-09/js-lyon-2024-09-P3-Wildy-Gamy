@@ -75,27 +75,6 @@ function PacmanGame() {
 
       if (response.status === 204) {
         navigate("/Games");
-      } else if (response.status === 404) {
-        const newResponse = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/scores`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              id_user: id_user,
-              id_game: id_game,
-              score: newScore,
-            }),
-          },
-        );
-
-        if (newResponse.ok) {
-          navigate("/Games");
-        } else {
-          console.info(newResponse);
-        }
       } else {
         console.info(response);
       }

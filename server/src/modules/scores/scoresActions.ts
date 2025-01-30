@@ -101,7 +101,13 @@ const editScores: RequestHandler = async (req, res, next) => {
         score.id_game,
       );
       if (affectedRows === 0) {
-        res.sendStatus(404);
+        const newScore = {
+          id_user: req.body.id_user,
+          id_game: req.body.id_game,
+          score: req.body.score,
+        };
+        const insertId = await scoresRepository.create(newScore);
+        res.status(201).json({ insertId });
       } else {
         res.sendStatus(204);
       }

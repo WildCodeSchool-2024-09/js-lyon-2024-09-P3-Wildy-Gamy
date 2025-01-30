@@ -88,7 +88,7 @@ create table exchanges (
   foreign key (id_user) references user(id)
 );
 
-insert into exchanges (id, id_lots, id_user)
+insert into exchanges ( id_lots, id_user)
 values
-(1,1,1),
-(2,4,2);
+(1,1),
+(4,2);

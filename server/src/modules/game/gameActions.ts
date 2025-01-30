@@ -37,6 +37,21 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 
+const readScores: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.id);
+    const scores = await gameRepository.readScores(userId);
+
+    if (scores == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(scores);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const edit: RequestHandler = async (req, res, next) => {
   try {
     const game = {
@@ -102,4 +117,4 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, edit, add, destroy };
+export default { browse, read, edit, add, destroy, readScores };
