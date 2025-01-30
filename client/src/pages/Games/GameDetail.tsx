@@ -35,7 +35,7 @@ function GameDetail() {
   const { theme } = useTheme();
   const { id } = useParams();
   const [game, setGame] = useState(null as null | gameProps);
-  const [fav, setFav] = useState(false as boolean);
+  const [fav, setFav] = useState(0 as number);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/games/${id}`)
@@ -46,30 +46,37 @@ function GameDetail() {
   }, [id]);
 
   const params = new URLSearchParams({
-    id_game: `${game?.id}`,
+    id_game: `${id}`,
     id_user: `${auth?.user.id}`,
   }).toString();
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/favorite?${params}`)
       .then((response) => response.json())
       .then((data) => {
-        setFav(data);
+        setFav(data.is_fav);
       });
   }, [params]);
 
   const HandleClick = () => {
+    let newFav = false;
+    if (fav === 0) {
+      setFav(1);
+      newFav = true;
+    } else {
+      setFav(0);
+      newFav = false;
+    }
     fetch(`${import.meta.env.VITE_API_URL}/api/favorite`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        is_fav: fav,
-        id_game: game?.id,
+        is_fav: newFav,
+        id_game: id,
         id_user: auth?.user.id,
       }),
     });
-    setFav(!fav);
   };
 
   return (
@@ -88,21 +95,22 @@ function GameDetail() {
               Jouer
             </Link>
           )}
-          {auth != null && fav === true ? (
-            <section>
-              <p>Un de vos jeux favoris!</p>
-              <button type="button" onClick={HandleClick}>
-                <img src="" alt="full heart" />
-              </button>
-            </section>
-          ) : (
-            <section>
-              <p>Ce jeu ne fait pas parti de vos favoris.</p>
-              <button type="button" onClick={HandleClick}>
-                <img src="" alt="empty heart" />
-              </button>
-            </section>
-          )}
+          {auth !== null &&
+            (fav === 1 ? (
+              <section>
+                <p>Un de vos jeux favoris!</p>
+                <button type="button" onClick={HandleClick}>
+                  <img src="" alt="full heart" />
+                </button>
+              </section>
+            ) : (
+              <section>
+                <p>Ce jeu ne fait pas parti de vos favoris.</p>
+                <button type="button" onClick={HandleClick}>
+                  <img src="" alt="empty heart" />
+                </button>
+              </section>
+            ))}
           <img className="gameimg" src={game.image} alt={game.name} />
           {game.in_room === 0 ? (
             <p>Bientôt dans vos salles</p>

@@ -32,41 +32,21 @@ interface gameProps {
   image: string;
 }
 
-interface favGames {
-  list: [idGame: number];
-}
-
 function FavoritesList() {
   const { auth } = useOutletContext<AuthProps>();
   const [games, setGames] = useState([] as [] | gameProps[]);
-  const [favorites, setFavorites] = useState([] as [] | favGames[]);
 
+  const id = new URLSearchParams({
+    id_user: `${auth?.user.id}`,
+  }).toString();
   if (auth != null && auth.user.id !== null) {
     useEffect(() => {
-      fetch(`${import.meta.env.VITE_API_URL}/api/allfavorites`, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(auth?.user.id),
-      })
+      fetch(`${import.meta.env.VITE_API_URL}/api/allfavorites?${id}`)
         .then((response) => response.json())
         .then((data) => {
-          setFavorites(data);
+          setGames(data);
         });
-    }, [auth?.user.id]);
-  }
-
-  if (favorites.length > 0) {
-    favorites.map((id) => {
-      useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/api/games/${id}`)
-          .then((response) => response.json())
-          .then((data) => {
-            setGames(data);
-          });
-      }, [id]);
-    });
+    }, [id]);
   }
 
   return (

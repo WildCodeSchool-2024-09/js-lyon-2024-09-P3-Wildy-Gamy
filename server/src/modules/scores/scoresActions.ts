@@ -32,12 +32,12 @@ const readFav: RequestHandler = async (req, res, next) => {
 
 const readAllFav: RequestHandler = async (req, res, next) => {
   try {
-    const id = Number(req.body.id_user);
+    const id_user = Number.parseInt(req.query.id_user as string);
 
-    if (id == null) {
+    if (id_user == null) {
       res.sendStatus(400).json({});
     } else {
-      const fav = await scoresRepository.readAllFav(id);
+      const fav = await scoresRepository.readAllFav(id_user);
 
       res.json(fav);
     }
