@@ -57,13 +57,21 @@ router.get("/api/scores", scoresActions.browse);
 router.get("/api/scores/:id", scoresActions.read);
 router.put("/api/scores/:id", scoresActions.editScores);
 router.post("/api/scores", scoresActions.addScore);
+router.get("/api/favorite?:params", scoresActions.readFav);
+router.get("/api/allfavorites?:id_user", scoresActions.readAllFav);
+router.put("/api/favorite", scoresActions.editFav);
 
 /* ************************************************************************* */
 
 import authActions from "./modules/auth/authActions";
 
 router.post("/api/login", authActions.login);
-router.post("/api/users", authActions.hashPassword, usersActions.add);
+router.post(
+  "/api/users",
+  authActions.hashPassword,
+  usersActions.add,
+  scoresActions.addScoreStart,
+);
 
 router.put("/api/users_password/:id", usersActions.editPassword);
 

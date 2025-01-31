@@ -32,8 +32,23 @@ a img {
   margin-left: 38%;
 }
 
+#toListFav {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.linkTo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (min-width: 720px) {
   .list {
     grid-template-columns: 1fr 1fr;
+  }
+
+  #toListFav {
+    width: 50%;
   }
 }
