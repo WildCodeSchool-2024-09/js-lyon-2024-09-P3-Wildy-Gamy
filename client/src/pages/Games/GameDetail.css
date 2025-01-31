@@ -9,6 +9,12 @@
   gap: 10px;
 }
 
+.ensemble {
+  img {
+    width: 30px;
+  }
+}
+
 .dark {
   body {
     background-color: var(--StandInBlack);

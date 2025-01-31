@@ -27,12 +27,6 @@ class ScoresRepository {
     return rows[0] as Score;
   }
 
-  // name varchar(255) not null,
-  // principle varchar(2000) not null,
-  // in_room boolean DEFAULT false,
-  // is_playable boolean DEFAULT false,
-  // image
-
   async readAllFav(id_user: number) {
     const [rows] = await databaseClient.query<Rows>(
       "select game.id, game.name, game.principle, game.image from game join scores on game.id=scores.id_game where scores.is_fav=true and scores.id_user = ?",
