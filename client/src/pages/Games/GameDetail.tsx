@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import "./GameDetail.css";
+import emptyHeart from "../../assets/images/empty-heart.svg";
+import fullHeart from "../../assets/images/full-heart.svg";
 
 type User = {
   id: number;
@@ -97,17 +99,17 @@ function GameDetail() {
           )}
           {auth !== null &&
             (fav === 1 ? (
-              <section>
+              <section className="ensemble">
                 <p>Un de vos jeux favoris!</p>
                 <button type="button" onClick={HandleClick}>
-                  <img src="" alt="full heart" />
+                  <img src={fullHeart} alt="full heart" />
                 </button>
               </section>
             ) : (
-              <section>
+              <section className="ensemble">
                 <p>Ce jeu ne fait pas parti de vos favoris.</p>
                 <button type="button" onClick={HandleClick}>
-                  <img src="" alt="empty heart" />
+                  <img src={emptyHeart} alt="empty heart" />
                 </button>
               </section>
             ))}
