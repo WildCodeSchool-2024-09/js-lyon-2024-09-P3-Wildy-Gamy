@@ -25,18 +25,18 @@ class exchangesRepository {
   }
 
   async create(exchange: Exchange) {
-    // Execute the SQL INSERT query to add a new category to the "category" table
+    // Execute the SQL INSERT query to add a new exchange to the "exchanges" table
     const [result] = await databaseClient.query<Result>(
       "insert into exchanges (id_lots, id_user) values (?, ?)",
       [exchange.id_lots, exchange.id_user],
     );
 
-    // Return the ID of the newly inserted item
+    // Return the ID of the newly inserted exchange
     return result.insertId;
   }
 
   async delete(id: number) {
-    // Execute the SQL DELETE query to delete an existing category from the "category" table
+    // Execute the SQL DELETE query to delete an existing exchange from the "exchanges" table
     const [result] = await databaseClient.query<Result>(
       "delete from exchanges where id = ?",
       [id],
