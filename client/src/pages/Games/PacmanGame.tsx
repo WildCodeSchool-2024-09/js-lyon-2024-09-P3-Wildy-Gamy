@@ -74,9 +74,7 @@ function PacmanGame() {
       );
 
       if (response.status === 204) {
-        console.info(response);
-      } else {
-        console.info(response);
+        console.error(response);
       }
     } catch (err) {
       console.error(err);
