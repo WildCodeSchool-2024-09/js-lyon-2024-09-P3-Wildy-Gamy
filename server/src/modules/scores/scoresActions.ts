@@ -19,7 +19,10 @@ const readFav: RequestHandler = async (req, res, next) => {
     };
 
     if (ids.id_game == null || ids.id_user == null) {
-      res.sendStatus(400).json({});
+      res.sendStatus(400).json({
+        status: "error 400",
+        message: "The information you are searching for does not exist",
+      });
     } else {
       const fav = await scoresRepository.readFav(ids.id_game, ids.id_user);
 
@@ -119,6 +122,7 @@ const editScores: RequestHandler = async (req, res, next) => {
 
 const addScoreStart: RequestHandler = async (req, res, next) => {
   try {
+    const result = [];
     for (let i = 1; i <= 10; i++) {
       const newScore = {
         id_user: req.body.id_user,
@@ -127,12 +131,31 @@ const addScoreStart: RequestHandler = async (req, res, next) => {
       };
 
       if (newScore.id_user == null) {
-        res.sendStatus(400).json({});
+        res.json({
+          status: 400,
+          message: "The information you are searching for does not exist",
+        });
       } else {
         const insertId = await scoresRepository.createAll(newScore);
+
+        if (insertId === null) {
+          result.push({
+            status: 404,
+            message: `The score for game ${i} could not be created.`,
+          });
+        } else {
+          result.push({
+            status: 201,
+            message: `Score for game ${i} created successfully.`,
+          });
+        }
       }
-      res.status(201);
     }
+    const hasError = result.some((element) => element.status === 404);
+    if (hasError) {
+      res.sendStatus(404);
+    }
+    res.sendStatus(201);
   } catch (err) {
     next(err);
   }
