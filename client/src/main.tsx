@@ -14,6 +14,7 @@ import Account from "./pages/Account/Account";
 import AccountEdit from "./pages/Account/AccountModify";
 import Login from "./pages/Account/Login";
 import SignupForm from "./pages/Account/SignupForm";
+import FavoritesList from "./pages/Games/FavoriteGames";
 import GameDetail from "./pages/Games/GameDetail";
 import GamesList from "./pages/Games/GameList";
 import PacmanGame from "./pages/Games/PacmanGame";
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
       },
       { path: "/account", element: <Account /> },
       { path: "/accountedit", element: <AccountEdit /> },
+      { path: "/favorites", element: <FavoritesList /> },
     ],
   },
 ]);

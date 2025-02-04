@@ -9,6 +9,12 @@
   gap: 10px;
 }
 
+.ensemble {
+  img {
+    width: 30px;
+  }
+}
+
 .dark {
   body {
     background-color: var(--StandInBlack);
@@ -20,7 +26,8 @@
     color: var(--StandInWhite);
   }
 
-  h3 {
+  h3,
+  a {
     color: var(--LightBg);
   }
   .ensemble {
@@ -44,7 +51,8 @@
     color: var(--StandInWhite);
   }
 
-  h3 {
+  h3,
+  a {
     color: var(--DarkBg);
   }
   .ensemble {
