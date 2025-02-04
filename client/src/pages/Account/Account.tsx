@@ -19,6 +19,7 @@ type Auth = {
 
 interface AuthProps {
   auth: Auth | null;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
 }
 
 interface scoreProps {
@@ -28,7 +29,7 @@ interface scoreProps {
 }
 
 function Account() {
-  const { auth } = useOutletContext<AuthProps>();
+  const { auth, setAuth } = useOutletContext<AuthProps>();
   const navigate = useNavigate();
   const id = auth?.user.id;
   const [scores, setScores] = useState<scoreProps[]>([] as [] | scoreProps[]);
@@ -62,6 +63,11 @@ function Account() {
     }
   };
 
+  const handleLogout = () => {
+    setAuth(null);
+    navigate("/login");
+  };
+
   return (
     <>
       <section className="account">
@@ -91,6 +97,9 @@ function Account() {
         <Link className="submit-btn" to="/accountedit">
           Modifier les informations
         </Link>
+        <button type="button" className="button-24" onClick={handleLogout}>
+          Se déconnecter
+        </button>
         <button
           type="button"
           className="button-24"
