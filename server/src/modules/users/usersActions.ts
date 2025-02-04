@@ -1,6 +1,7 @@
 import argon2 from "argon2";
 import type { RequestHandler } from "express";
 import { hashingOptions } from "../auth/authActions";
+import scoresRepository from "../scores/scoresRepository";
 import usersRepository from "./usersRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -117,9 +118,9 @@ const add: RequestHandler = async (req, res, next) => {
     ) {
       res.sendStatus(400).json({});
     } else {
-      const insertId = await usersRepository.create(newUser);
+      req.body.id_user = await usersRepository.create(newUser);
 
-      res.status(201).json({ insertId });
+      next();
     }
   } catch (err) {
     next(err);
@@ -129,6 +130,8 @@ const add: RequestHandler = async (req, res, next) => {
 const destroy: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number.parseInt(req.params.id);
+    const affectedRowsScores = await scoresRepository.delete(userId);
+
     const affectedRows = await usersRepository.delete(userId);
 
     if (affectedRows === 0) {
