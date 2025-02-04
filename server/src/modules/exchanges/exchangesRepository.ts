@@ -45,6 +45,20 @@ class exchangesRepository {
     // Return how many rows were affected
     return result.affectedRows;
   }
+
+  async addBuyLot(id_lot: number, id_user: number) {
+    const [result] = await databaseClient.query<Result>(
+      `INSERT INTO exchanges (id_lots, id_user)
+       SELECT l.id, u.id
+       FROM lots l
+       JOIN user u ON u.id = ?
+       WHERE l.id = ? 
+       AND l.nb_lots > 0 
+       AND u.points >= l.nb_points_needed`,
+      [id_lot, id_user],
+    );
+    return result.affectedRows;
+  }
 }
 
 export default new exchangesRepository();

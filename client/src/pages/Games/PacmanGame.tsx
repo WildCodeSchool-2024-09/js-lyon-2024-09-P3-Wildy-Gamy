@@ -74,7 +74,30 @@ function PacmanGame() {
       );
 
       if (response.status === 204) {
-        navigate("/Games");
+        console.error(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handlePoints = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/usersPoints/${id_user}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id_user,
+          }),
+        },
+      );
+
+      if (response.status === 201) {
+        navigate("/account");
       } else {
         console.info(response);
       }
@@ -87,6 +110,9 @@ function PacmanGame() {
     <div className="pacman">
       <button className="button-74" type="button" onClick={handleScore}>
         Enregistrer Score
+      </button>
+      <button className="button-74" type="button" onClick={handlePoints}>
+        Update Points
       </button>
       <Pacman />
       <h1 id="score"> Score :{newScore}</h1>

@@ -37,4 +37,19 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read };
+const readImage: RequestHandler = async (req, res, next) => {
+  try {
+    const lotId = Number(req.params.id);
+    const lot = await lotRepository.readImage(lotId);
+
+    if (lot == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(lot);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, readImage };

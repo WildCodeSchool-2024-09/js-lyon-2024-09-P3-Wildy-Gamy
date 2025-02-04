@@ -67,6 +67,22 @@ class UserRepository {
     return result.affectedRows;
   }
 
+  async updatePoints(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "update user u join (select id_user, coalesce(sum(score), 0) as total_points from scores group by id_user) s on u.id = s.id_user set u.points = s.total_points where u.id = ?",
+      [id],
+    );
+    return result.affectedRows;
+  }
+
+  async updateBuyLot(userId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "update user u set u.points = u.points - (select l.nb_points_needed from exchanges e join lots l on e.id_lots = l.id where e.id_user = u.id order by e.id desc limit 1) where u.id = ?",
+      [userId],
+    );
+    return result.affectedRows;
+  }
+
   async delete(id: number) {
     // Execute the SQL DELETE query to delete an existing category from the "category" table
     const [result] = await databaseClient.query<Result>(

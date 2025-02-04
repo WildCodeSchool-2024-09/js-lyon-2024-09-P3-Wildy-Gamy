@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import "./LotsDetail.css";
 
 interface lotProps {
@@ -9,10 +10,40 @@ interface lotProps {
   nb_points_needed: number;
   image: string;
 }
+interface userProps {
+  id: number;
+  pseudo: string;
+  points: number;
+  email: string;
+  is_admin: boolean;
+  image: string;
+}
+
+type User = {
+  id: number;
+  pseudo: string;
+  points: number;
+  email: string;
+  is_admin: boolean;
+  image: string;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
+interface AuthProps {
+  auth: Auth | null;
+}
 
 function LotDetail() {
+  const { auth } = useOutletContext<AuthProps>();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const iD = auth?.user.id;
   const [lot, setLot] = useState(null as null | lotProps);
+  const [user, setUser] = useState<userProps | null>(null);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/lots/${id}`)
@@ -21,6 +52,40 @@ function LotDetail() {
         setLot(data);
       });
   }, [id]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/${iD}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }, [iD]);
+
+  const handleBuy = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/exchangesLot/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id_lot: id,
+            id_user: iD,
+          }),
+        },
+      );
+
+      if (response.status === 201) {
+        navigate("/account");
+      } else {
+        console.info(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     lot && (
@@ -31,6 +96,11 @@ function LotDetail() {
           Nombres de {lot.name} existants : {lot.nb_lots}
         </h3>
         <p>Prix : {lot.nb_points_needed} pts</p>
+        <h4>Total des points :</h4>
+        <p>{user?.points}</p>
+        <button className="button-74" type="button" onClick={handleBuy}>
+          Acheter
+        </button>
       </div>
     )
   );
