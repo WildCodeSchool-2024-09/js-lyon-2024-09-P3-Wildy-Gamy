@@ -74,6 +74,17 @@ class ScoresRepository {
 
     return result.insertId;
   }
+
+  async delete(id_user: number) {
+    // Execute the SQL DELETE query to delete an existing category from the "category" table
+    const [result] = await databaseClient.query<Result>(
+      "delete from scores where id_user = ?",
+      [id_user],
+    );
+
+    // Return how many rows were affected
+    return result.affectedRows;
+  }
 }
 
 export default new ScoresRepository();
