@@ -101,6 +101,44 @@ const editPassword: RequestHandler = async (req, res, next) => {
   }
 };
 
+const editPoints: RequestHandler = async (req, res, next) => {
+  try {
+    const user = {
+      id: Number.parseInt(req.params.id),
+    };
+    if (user.id == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const affectedRows = await usersRepository.updatePoints(user.id);
+      if (affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(201);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const editBuyLot: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.body.id);
+    if (userId === 0) {
+      res.sendStatus(404);
+    } else {
+      const affectedRows = await usersRepository.updateBuyLot(userId);
+      if (affectedRows == null) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(201);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const add: RequestHandler = async (req, res, next) => {
   try {
     const newUser = {
@@ -141,4 +179,13 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, edit, editPassword, add, destroy };
+export default {
+  browse,
+  read,
+  edit,
+  editPassword,
+  editPoints,
+  editBuyLot,
+  add,
+  destroy,
+};
