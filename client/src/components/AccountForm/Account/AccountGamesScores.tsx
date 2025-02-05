@@ -9,7 +9,7 @@ interface GameScoreProps {
 function GameScore({ data }: GameScoreProps) {
   return (
     <p>
-      Meilleur score sur {data.game} : {data.score}
+      Score {data.game} : {data.score}
     </p>
   );
 }

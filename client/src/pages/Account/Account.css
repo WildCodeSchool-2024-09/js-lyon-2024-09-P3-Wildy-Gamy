@@ -1,14 +1,27 @@
 .accountInfo {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 15px;
   padding-bottom: 20px;
   article {
     img {
-      width: 100%;
+      width: 40%;
     }
   }
+}
+
+.infoUser {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lotObtenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
 }
 
 /* CSS */
@@ -57,11 +70,11 @@
   }
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (max-width: 840px) {
   .accountInfo {
     article {
       img {
-        width: 40%;
+        width: 60%;
       }
     }
   }
@@ -69,5 +82,43 @@
     a {
       width: 40%;
     }
+  }
+  .accountScores {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .accountInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    article {
+      img {
+        width: 40%;
+      }
+    }
+    .accountScores {
+      display: none;
+    }
+  }
+
+  .infoUser {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .lotObtenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+  }
+
+  .accountScores {
+    display: none;
   }
 }
