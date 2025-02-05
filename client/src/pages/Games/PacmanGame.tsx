@@ -112,7 +112,7 @@ function PacmanGame() {
         Enregistrer Score
       </button>
       <button className="button-74" type="button" onClick={handlePoints}>
-        Update Points
+        Mettre à jour les Points
       </button>
       <Pacman />
       <h1 id="score"> Score :{newScore}</h1>

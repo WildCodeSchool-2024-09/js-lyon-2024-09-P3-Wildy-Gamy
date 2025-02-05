@@ -67,11 +67,11 @@ function Login() {
   };
   return (
     <section className="form-container">
-      <h2>Connection</h2>
+      <h2>Connexion</h2>
       <form onSubmit={handleSubmit} className="login">
         <div>
           {/* Champ pour l'email */}
-          <label htmlFor="email">email</label>{" "}
+          <label htmlFor="email">Email</label>{" "}
           <input
             ref={emailRef}
             type="email"
@@ -81,7 +81,7 @@ function Login() {
         </div>
         <div>
           {/* Champ pour le mot de passe */}
-          <label htmlFor="password">password</label>{" "}
+          <label htmlFor="password">Password</label>{" "}
           <input
             type="password"
             id="password"
@@ -91,7 +91,7 @@ function Login() {
         </div>
         {/* Bouton de soumission du formulaire */}
         <button className="submit-btn" type="submit">
-          Send
+          Connexion
         </button>
       </form>
       <p>Si vous n'êtes pas encore inscrit</p>

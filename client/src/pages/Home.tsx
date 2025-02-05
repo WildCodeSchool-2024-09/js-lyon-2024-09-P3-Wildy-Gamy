@@ -39,7 +39,7 @@ function Home() {
         </article>
         <article>
           <h2>
-            <Link to="/About">Learn more about us</Link>
+            <Link to="/About">Plus sur nous</Link>
           </h2>
         </article>
         <article className="jeux" id="allGames">

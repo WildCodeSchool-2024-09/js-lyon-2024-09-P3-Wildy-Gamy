@@ -31,7 +31,7 @@ function AccountForm({ children, defaultValue, onSubmit }: AccountFormProps) {
         <input type="text" name="pseudo" defaultValue={defaultValue.pseudo} />
       </div>
       <div className="form-container">
-        <label htmlFor="email">email</label>
+        <label htmlFor="email">Email</label>
         <input type="text" name="email" defaultValue={defaultValue.email} />
       </div>
       <div className="form-container">

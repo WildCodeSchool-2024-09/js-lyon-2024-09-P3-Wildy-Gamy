@@ -68,7 +68,7 @@ const SignupForm: React.FC = () => {
 
   return (
     <section className="form-container">
-      <h2>Sign Up</h2>
+      <h2>Inscription</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div>
@@ -91,19 +91,19 @@ const SignupForm: React.FC = () => {
             id="email"
             name="email"
             required
-            placeholder="Your email"
+            placeholder="Email"
             className="form-input"
             ref={emailRef}
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mot de passe</label>
           <input
             type="password"
             id="password"
             onChange={handlePasswordChange}
             required
-            placeholder="Your password"
+            placeholder="Mot de passe"
             className="form-input"
           />
           {password.length >= 8 ? "✅" : "❌"}{" "}
@@ -111,13 +111,13 @@ const SignupForm: React.FC = () => {
         </div>
         <div>
           {/* Champ pour la confirmation du mot de passe */}
-          <label htmlFor="confirm-password">Confirm password</label>{" "}
+          <label htmlFor="confirm-password">Confirmez votre mot de passe</label>{" "}
           <input
             type="password"
             id="confirm-password"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
-            placeholder="Confirm your password"
+            placeholder="Confirmez votre mot de passe"
             className="form-input"
           />{" "}
           {/* Indicateur de correspondance avec le mot de passe */}
@@ -126,7 +126,7 @@ const SignupForm: React.FC = () => {
 
         <div>
           <button type="submit" className="submit-btn">
-            Sign Up
+            Inscription
           </button>
         </div>
       </form>

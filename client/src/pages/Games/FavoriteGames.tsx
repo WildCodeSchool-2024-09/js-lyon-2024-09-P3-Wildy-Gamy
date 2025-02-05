@@ -51,7 +51,9 @@ function FavoritesList() {
 
   return (
     <>
-      {games.length === 0 ? (
+      {auth === null ? (
+        <p>Connectez-vous pour pouvoir faire une liste de vos jeux favoris</p>
+      ) : games.length === 0 ? (
         <p key="">Pas encore de jeux dans vos favoris</p>
       ) : (
         <Carousel>

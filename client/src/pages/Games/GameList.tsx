@@ -30,7 +30,6 @@ type Auth = {
 
 interface AuthProps {
   auth: Auth | null;
-  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
 }
 
 function GamesList() {
@@ -48,7 +47,7 @@ function GamesList() {
   return (
     <>
       <Input setGames={setGames} games={games} />
-      {auth && (
+      {auth.auth !== null && (
         <figure className="linkTo">
           <Link className="ensemble" id="toListFav" to="/favorites">
             Lien vers vos jeux favoris!
