@@ -31,12 +31,10 @@
     color: var(--LightBg);
   }
   .ensemble {
-    background-color: var(--DarkBg);
+    background-color: var(--StandInBlack);
+    border: solid 5px var(--LightBg);
+    border-radius: 15px;
     padding: 10px;
-    border-top: 5px var(--DarkShadow) solid;
-    border-bottom: 5px var(--DarkShadow) solid;
-    border-left: 5px var(--DarkShadow2) solid;
-    border-right: 5px var(--DarkShadow2) solid;
   }
 }
 

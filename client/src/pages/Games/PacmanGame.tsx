@@ -108,10 +108,14 @@ function PacmanGame() {
 
   return (
     <div className="pacman">
-      <button className="button-74" type="button" onClick={handleScore}>
-        Enregistrer Score
-      </button>
-      <button className="button-74" type="button" onClick={handlePoints}>
+      <button
+        className="button-74"
+        type="button"
+        onClick={() => {
+          handlePoints();
+          handleScore();
+        }}
+      >
         Update Points
       </button>
       <Pacman />

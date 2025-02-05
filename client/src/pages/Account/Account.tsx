@@ -107,34 +107,42 @@ function Account() {
       <section className="account">
         {auth != null && (
           <section className="accountInfo">
-            <article className="ensemble">
-              <h4>Votre pseudo</h4>
-              <p>{auth.user.pseudo}</p>
-            </article>
-            <article className="ensemble">
-              <h4>Votre email</h4>
-              <p>{auth.user.email}</p>
-            </article>
-            <article className="ensemble">
-              <h4>Votre image</h4>
-              <img src={auth.user.image} alt="user profile" />
-            </article>
+            <section>
+              <div className="infoUser">
+                <article className="ensemble">
+                  <h4>pseudo :</h4>
+                  <p>{auth.user.pseudo}</p>
+                </article>
+                <article className="ensemble">
+                  <h4>email :</h4>
+                  <p>{auth.user.email}</p>
+                </article>
+                <article className="ensemble">
+                  <h4>image :</h4>
+                  <img src={auth.user.image} alt="user profile" />
+                </article>
+              </div>
+            </section>
             <div>
               {scores.map((score) => (
-                <article className="ensemble" key={score.id}>
-                  <GameScore data={score} />
-                </article>
+                <div className="accountScores" key={score.id}>
+                  <article className="ensemble">
+                    <GameScore data={score} />
+                  </article>
+                </div>
               ))}
+              <article className="ensemble">
+                <h4>points:</h4>
+                <p>{user?.points}</p>
+              </article>
             </div>
             <article className="ensemble">
-              <h4>Total des points :</h4>
-              <p>{user?.points}</p>
-            </article>
-            <article className="ensemble">
               <h4>Lots obtenu :</h4>
-              {lots.map((lot) => (
-                <img key={lot.user_id} src={lot.lot_image} alt="lot obtenu" />
-              ))}
+              <div className="lotObtenu">
+                {lots.map((lot) => (
+                  <img key={lot.user_id} src={lot.lot_image} alt="lot obtenu" />
+                ))}
+              </div>
             </article>
           </section>
         )}
