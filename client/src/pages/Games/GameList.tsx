@@ -54,7 +54,14 @@ function GamesList() {
           </Link>
         </figure>
       )}
-      <Carousel>
+      <Carousel
+        autoPlay
+        interval={3000}
+        infiniteLoop
+        thumbWidth={120}
+        showIndicators={false}
+        showStatus={false}
+      >
         {games.length === 0
           ? [<p key="">Il n'y a pas de jeux pour l'instant</p>]
           : games.map((game) => (
