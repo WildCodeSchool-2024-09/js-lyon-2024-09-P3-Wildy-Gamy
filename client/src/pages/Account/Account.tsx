@@ -123,7 +123,7 @@ function Account() {
                 </article>
               </div>
             </section>
-            <div>
+            <section className="parentScore">
               {scores.map((score) => (
                 <div className="accountScores" key={score.id}>
                   <article className="ensemble">
@@ -135,7 +135,7 @@ function Account() {
                 <h4>points:</h4>
                 <p>{user?.points}</p>
               </article>
-            </div>
+            </section>
             <article className="ensemble">
               <h4>Lots obtenu :</h4>
               <div className="lotObtenu">
@@ -146,19 +146,21 @@ function Account() {
             </article>
           </section>
         )}
-        <Link className="submit-btn" to="/accountedit">
-          Modifier les informations
-        </Link>
-        <button type="button" className="button-24" onClick={handleLogout}>
-          Se déconnecter
-        </button>
-        <button
-          type="button"
-          className="button-24"
-          onClick={() => handleDelete(id)}
-        >
-          Supprimer Compte
-        </button>
+        <section className="buttonS">
+          <Link className="button-24" to="/accountedit">
+            Modifier les informations
+          </Link>
+          <button type="button" className="button-24" onClick={handleLogout}>
+            Se déconnecter
+          </button>
+          <button
+            type="button"
+            className="button-24"
+            onClick={() => handleDelete(id)}
+          >
+            Supprimer Compte
+          </button>
+        </section>
       </section>
     </>
   );
