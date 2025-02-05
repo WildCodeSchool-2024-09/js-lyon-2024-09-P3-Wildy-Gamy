@@ -18,6 +18,9 @@
   }
   p {
     color: var(--StandInWhite);
+    font-size: large;
+    font-family: monospace;
+    text-align: center;
   }
   a {
     color: var(--StandInWhite);
