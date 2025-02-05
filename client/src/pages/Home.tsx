@@ -31,15 +31,15 @@ function Home() {
         )}
         <article>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum
-            asperiores ullam doloribus ducimus dolore itaque rerum eius ipsum
-            est porro explicabo assumenda esse possimus incidunt pariatur quas,
-            consequuntur optio ut.
+            Que tu sois fan de classiques rétro ou à la recherche de nouveaux
+            défis, notre plateforme est faite pour toi ! Notre mission ? Offrir
+            aux joueurs une expérience fluide, immersive et pleine de défis, où
+            chaque partie est une nouvelle aventure !
           </p>
         </article>
         <article>
           <h2>
-            <Link to="/About">Learn more about us</Link>
+            <Link to="/About">Plus sur nous</Link>
           </h2>
         </article>
         <article className="jeux" id="allGames">
