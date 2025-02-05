@@ -1,4 +1,4 @@
-.lotDetail {
+.lotDetail section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +23,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-left: 46.5%;
 }
 
 .button-74:hover {
