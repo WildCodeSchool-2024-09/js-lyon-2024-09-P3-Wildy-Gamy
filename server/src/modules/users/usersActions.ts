@@ -146,7 +146,8 @@ const add: RequestHandler = async (req, res, next) => {
       pseudo: req.body.pseudo,
       email: req.body.email,
       hashed_password: req.body.hashed_password,
-      image: req.body.image,
+      image:
+        "https://s2.qwant.com/thumbr/474x471/d/2/dbb9a1d2db6753db4980e0a26fd79b94cc6314e6164bafacec2a4efbf82872/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.KJolamr1d03TN81cejXYkwAAAA%26pid%3DApi&q=0&b=1&p=0&a=0",
     };
 
     if (
