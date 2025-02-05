@@ -41,7 +41,7 @@ function LotDetail() {
   const { auth } = useOutletContext<AuthProps>();
   const { id } = useParams();
   const navigate = useNavigate();
-  const iD = auth?.user.id;
+  const id_user = auth?.user.id;
   const [lot, setLot] = useState(null as null | lotProps);
   const [user, setUser] = useState<userProps | null>(null);
 
@@ -54,12 +54,12 @@ function LotDetail() {
   }, [id]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/users/${iD}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id_user}`)
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
       });
-  }, [iD]);
+  }, [id_user]);
 
   const handleBuy = async () => {
     try {
@@ -72,7 +72,7 @@ function LotDetail() {
           },
           body: JSON.stringify({
             id_lot: id,
-            id_user: iD,
+            id_user: id_user,
           }),
         },
       );
@@ -90,7 +90,7 @@ function LotDetail() {
   const handleEditPoints = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/usersBuyPoints/${iD}`,
+        `${import.meta.env.VITE_API_URL}/api/usersBuyPoints/${id_user}`,
         {
           method: "PUT",
           headers: {
@@ -98,7 +98,7 @@ function LotDetail() {
           },
           body: JSON.stringify({
             id_lot: id,
-            id_user: iD,
+            id_user: id_user,
           }),
         },
       );
@@ -124,7 +124,7 @@ function LotDetail() {
           },
           body: JSON.stringify({
             id_lot: id,
-            id_user: iD,
+            id_user: id_user,
           }),
         },
       );
