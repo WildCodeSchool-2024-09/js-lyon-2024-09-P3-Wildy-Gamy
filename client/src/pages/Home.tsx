@@ -23,7 +23,9 @@ function Home() {
       <section className="home">
         {favGame != null && (
           <article className="jeux" id="fav">
-            <img src={favGame.image} alt={favGame.name} />
+            <Link to={`/Game/${favGame.id}`}>
+              <img src={favGame.image} alt={favGame.name} />
+            </Link>
             <h2>
               <Link to={`/Game/${favGame.id}`}>{favGame.name}</Link>
             </h2>
@@ -39,7 +41,7 @@ function Home() {
         </article>
         <article>
           <h2>
-            <Link to="/About">Plus sur nous</Link>
+            <Link to="/About">A propos</Link>
           </h2>
         </article>
         <article className="jeux" id="allGames">

@@ -41,8 +41,8 @@ class UserRepository {
   async create(user: Omit<User, "id" | "is_admin">) {
     // Execute the SQL INSERT query to add a new category to the "category" table
     const [result] = await databaseClient.query<Result>(
-      "insert into user (pseudo, email, hashed_password) values (?, ?, ?)",
-      [user.pseudo, user.email, user.hashed_password],
+      "insert into user (pseudo, email, hashed_password, image) values (?, ?, ?, ?)",
+      [user.pseudo, user.email, user.hashed_password, user.image],
     );
 
     // Return the ID of the newly inserted item
