@@ -25,7 +25,6 @@ function App() {
     <>
       <div className={`${theme}`}>
         <NavBar auth={auth} />
-        {auth && <p>Hello {auth.user.pseudo}</p>}
         <main>
           <Outlet context={{ auth, setAuth }} />
         </main>
