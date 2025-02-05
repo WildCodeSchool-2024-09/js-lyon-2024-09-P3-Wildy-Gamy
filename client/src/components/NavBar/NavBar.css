@@ -53,3 +53,9 @@ nav {
     }
   }
 }
+
+@media screen and (min-width: 720px) {
+  div ul li a {
+    font-size: large;
+  }
+}
