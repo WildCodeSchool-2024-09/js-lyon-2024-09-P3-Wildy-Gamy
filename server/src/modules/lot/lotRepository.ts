@@ -45,6 +45,14 @@ class lotRepository {
     );
     return rows as LotAccount[];
   }
+
+  async updateNbLot(lotId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "update lots set nb_lots = nb_lots - 1 where id = ? and nb_lots > 0;",
+      [lotId],
+    );
+    return result.affectedRows;
+  }
 }
 
 export default new lotRepository();

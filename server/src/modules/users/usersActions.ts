@@ -124,7 +124,7 @@ const editPoints: RequestHandler = async (req, res, next) => {
 
 const editBuyLot: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.body.id);
+    const userId = Number(req.params.id);
     if (userId === 0) {
       res.sendStatus(404);
     } else {
