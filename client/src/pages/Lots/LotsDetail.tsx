@@ -87,6 +87,58 @@ function LotDetail() {
     }
   };
 
+  const handleEditPoints = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/usersBuyPoints/${iD}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id_lot: id,
+            id_user: iD,
+          }),
+        },
+      );
+
+      if (response.status === 201) {
+        navigate("/account");
+      } else {
+        console.info(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleEditNbLot = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/lotsNbPoints/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id_lot: id,
+            id_user: iD,
+          }),
+        },
+      );
+
+      if (response.status === 201) {
+        navigate("/account");
+      } else {
+        console.info(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     lot && (
       <div className="lotDetail">
@@ -98,7 +150,15 @@ function LotDetail() {
         <p>Prix : {lot.nb_points_needed} pts</p>
         <h4>Total des points :</h4>
         <p>{user?.points}</p>
-        <button className="button-74" type="button" onClick={handleBuy}>
+        <button
+          className="button-74"
+          type="button"
+          onClick={() => {
+            handleBuy();
+            handleEditPoints();
+            handleEditNbLot();
+          }}
+        >
           Acheter
         </button>
       </div>

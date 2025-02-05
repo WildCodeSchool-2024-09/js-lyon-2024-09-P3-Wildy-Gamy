@@ -52,4 +52,22 @@ const readImage: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, readImage };
+const editNbLot: RequestHandler = async (req, res, next) => {
+  try {
+    const lotId = Number(req.params.id);
+    if (lotId == null) {
+      res.sendStatus(404);
+    } else {
+      const affectedRows = await lotRepository.updateNbLot(lotId);
+      if (affectedRows == null) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(201);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, readImage, editNbLot };

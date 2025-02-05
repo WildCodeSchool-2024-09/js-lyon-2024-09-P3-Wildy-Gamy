@@ -72,7 +72,6 @@ const addBuyLot: RequestHandler = async (req, res, next) => {
         res.sendStatus(404);
       } else {
         res.sendStatus(201);
-        next();
       }
     }
   } catch (err) {
