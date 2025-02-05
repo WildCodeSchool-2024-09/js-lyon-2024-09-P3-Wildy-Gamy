@@ -142,14 +142,18 @@ function LotDetail() {
   return (
     lot && (
       <div className="lotDetail">
-        <h2>{lot.name}</h2>
-        <img src={lot.image} alt={lot.name} />
-        <h3>
-          Nombres de {lot.name} existants : {lot.nb_lots}
-        </h3>
-        <p>Prix : {lot.nb_points_needed} pts</p>
-        <h4>Total des points :</h4>
-        <p>{user?.points}</p>
+        <section className="home">
+          <article>
+            <h2>{lot.name}</h2>
+            <img src={lot.image} alt={lot.name} />
+            <h3>
+              Nombres de {lot.name} existants : {lot.nb_lots}
+            </h3>
+            <p>Prix : {lot.nb_points_needed} pts</p>
+            <h4>Total des points :</h4>
+            <p>{user?.points}</p>
+          </article>
+        </section>
         <button
           className="button-74"
           type="button"
