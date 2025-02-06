@@ -156,7 +156,10 @@ function Account() {
           <button
             type="button"
             className="button-24"
-            onClick={() => handleDelete(id)}
+            onClick={() => {
+              handleDelete(id);
+              handleLogout();
+            }}
           >
             Supprimer Compte
           </button>
