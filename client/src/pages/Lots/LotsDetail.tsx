@@ -89,6 +89,12 @@ function LotDetail() {
 
   const handleEditPoints = async () => {
     try {
+      if (user == null || lot == null) {
+        console.error("user or lot is null");
+      } else if (user.points < lot.nb_points_needed) {
+        alert("Vous n'avez pas assez de points");
+        return;
+      }
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/usersBuyPoints/${id_user}`,
         {
