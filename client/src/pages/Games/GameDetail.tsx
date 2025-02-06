@@ -111,7 +111,6 @@ function GameDetail() {
                 </button>
               </section>
             ))}
-          <img className="gameimg" src={game.image} alt={game.name} />
           {game.is_playable === 0 ? (
             <p>Bientôt jouable en salle</p>
           ) : (
@@ -119,6 +118,8 @@ function GameDetail() {
               Jouer
             </Link>
           )}
+          <img className="gameimg" src={game.image} alt={game.name} />
+
           {game.in_room === 0 ? (
             <p>Bientôt dans vos salles</p>
           ) : (
