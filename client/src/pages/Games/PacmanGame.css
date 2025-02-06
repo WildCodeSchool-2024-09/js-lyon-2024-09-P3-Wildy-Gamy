@@ -1,5 +1,12 @@
-.pacman {
-  margin: 5vw 20vw 0vw 20vw;
+.pacman-div {
+  margin: 2vw 20vw 0vw 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+.pacman-information {
+  margin-bottom: 5px;
 }
 
 #score {
@@ -37,6 +44,10 @@
 }
 
 @media (min-width: 768px) {
+  .pacman-information {
+    display: flex;
+  }
+
   .button-74 {
     min-width: 120px;
     padding: 0 25px;
