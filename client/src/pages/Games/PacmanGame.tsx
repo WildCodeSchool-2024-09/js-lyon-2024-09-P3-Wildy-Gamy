@@ -25,6 +25,15 @@ interface AuthProps {
   auth: Auth | null;
 }
 
+interface userProps {
+  id: number;
+  pseudo: string;
+  points: number;
+  email: string;
+  is_admin: boolean;
+  image: string;
+}
+
 function PacmanGame() {
   const { auth } = useOutletContext<AuthProps>();
   const id_user = auth?.user.id;
@@ -32,6 +41,7 @@ function PacmanGame() {
   const navigate = useNavigate();
   const [timeSpent, setTimeSpent] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [user, setUser] = useState<userProps | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -39,6 +49,14 @@ function PacmanGame() {
       document.body.style.overflow = "scroll";
     };
   }, []);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id_user}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }, [id_user]);
 
   useEffect(() => {
     if (isGameOver) return;
@@ -68,6 +86,13 @@ function PacmanGame() {
 
   const handleScore = async () => {
     try {
+      if (user == null) {
+        console.error("user is null");
+      } else if (user.points - newScore > newScore) {
+        alert("Votre score est inferieur a vos points!!");
+        return;
+      }
+
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/scores/${id_user}`,
         {
@@ -107,7 +132,7 @@ function PacmanGame() {
       );
 
       if (response.status === 201) {
-        navigate("/account");
+        navigate("/games");
       } else {
         console.info(response);
       }

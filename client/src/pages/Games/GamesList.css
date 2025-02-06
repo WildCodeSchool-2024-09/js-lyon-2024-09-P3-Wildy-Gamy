@@ -28,8 +28,8 @@ a img {
 }
 
 .carousel-root {
-  width: 20%;
-  margin-left: 40%;
+  width: 30%;
+  margin-left: 35%;
 }
 
 #toListFav {
@@ -43,12 +43,38 @@ a img {
   justify-content: center;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 1200px) {
+  .carousel-root {
+    width: 20%;
+    margin-left: 40%;
+  }
+}
+
+@media screen and (max-width: 720px) {
   .list {
     grid-template-columns: 1fr 1fr;
   }
 
   #toListFav {
+    width: 20%;
+  }
+
+  .carousel-root {
     width: 50%;
+    margin-left: 26%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .carousel-root {
+    width: 60%;
+    margin-left: 20%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .carousel-root {
+    width: 80%;
+    margin-left: 10%;
   }
 }

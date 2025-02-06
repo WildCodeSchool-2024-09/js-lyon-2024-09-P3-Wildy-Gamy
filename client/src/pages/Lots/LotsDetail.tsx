@@ -78,7 +78,7 @@ function LotDetail() {
       );
 
       if (response.status === 201) {
-        navigate("/account");
+        navigate("/games");
       } else {
         console.info(response);
       }
@@ -110,7 +110,7 @@ function LotDetail() {
       );
 
       if (response.status === 201) {
-        navigate("/account");
+        navigate("/games");
       } else {
         console.info(response);
       }
@@ -136,7 +136,7 @@ function LotDetail() {
       );
 
       if (response.status === 201) {
-        navigate("/account");
+        navigate("/games");
       } else {
         console.info(response);
       }
