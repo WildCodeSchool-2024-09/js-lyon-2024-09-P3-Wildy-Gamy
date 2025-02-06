@@ -57,6 +57,15 @@ function PacmanGame() {
   }, [isGameOver]);
   const newScore = timeSpent * 10;
 
+  const handleClick = () => {
+    if (auth == null) {
+      alert("Veuillez vous connecter pour enregistrer votre score");
+    } else {
+      handlePoints();
+      handleScore();
+    }
+  };
+
   const handleScore = async () => {
     try {
       const response = await fetch(
@@ -117,15 +126,16 @@ function PacmanGame() {
           className="button-74"
           type="button"
           onClick={() => {
-            handlePoints();
-            handleScore();
+            handleClick();
           }}
         >
           Update Points
         </button>
       </section>
-
-      <Pacman />
+      <section>
+        <h3 className={`${isGameOver}`}>Game Over</h3>
+        <Pacman />
+      </section>
       <h1 id="score"> Score :{newScore}</h1>
     </div>
   );

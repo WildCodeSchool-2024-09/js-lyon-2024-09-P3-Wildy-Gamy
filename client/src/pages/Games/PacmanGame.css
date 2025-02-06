@@ -5,6 +5,24 @@
   justify-self: center;
 }
 
+.true {
+  position: absolute;
+  z-index: 999;
+  text-align: center;
+  align-content: center;
+  height: 436px;
+  width: 336px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.false {
+  opacity: 0%;
+}
+
+.running-score {
+  display: none;
+}
+
 .pacman-information {
   margin-bottom: 5px;
 }
