@@ -1,8 +1,9 @@
 import Pacman from "pacman-react";
 import { useEffect, useState } from "react";
 import { render } from "react-dom";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import "./PacmanGame.css";
+import fleche from "../../assets/images/fleche.png";
 render(<Pacman />, document.getElementById("root"));
 
 type User = {
@@ -107,17 +108,23 @@ function PacmanGame() {
   };
 
   return (
-    <div className="pacman">
-      <button
-        className="button-74"
-        type="button"
-        onClick={() => {
-          handlePoints();
-          handleScore();
-        }}
-      >
-        Update Points
-      </button>
+    <div className="pacman-div">
+      <section className="pacman-information">
+        <Link to="/games" className="return">
+          <img src={fleche} alt="Retourner voir plus de jeux" />
+        </Link>
+        <button
+          className="button-74"
+          type="button"
+          onClick={() => {
+            handlePoints();
+            handleScore();
+          }}
+        >
+          Update Points
+        </button>
+      </section>
+
       <Pacman />
       <h1 id="score"> Score :{newScore}</h1>
     </div>

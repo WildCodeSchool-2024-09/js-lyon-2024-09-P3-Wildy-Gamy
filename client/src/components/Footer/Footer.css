@@ -4,6 +4,7 @@
   justify-content: space-around;
   align-items: center;
   text-align: center;
+  background-color: var(--StandInBlack);
 }
 
 .footer-claire {
