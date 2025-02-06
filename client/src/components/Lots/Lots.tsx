@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./Lots.css";
 
 interface LotsProps {
   data: {
@@ -12,10 +13,10 @@ interface LotsProps {
 function Lots({ data }: LotsProps) {
   return (
     <>
-      <h4>{data.name}</h4>
+      <h4 className="star-title">{data.name}</h4>
       <Link to={`/lot/${data.id}`}>
         <img className="lotimg" src={data.image} alt={data.name} />
-        <p> prix: {data.nb_points_needed} points</p>
+        <p className="star-title"> prix: {data.nb_points_needed} points</p>
       </Link>
     </>
   );
