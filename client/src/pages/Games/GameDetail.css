@@ -87,18 +87,18 @@
 }
 
 .gameimg {
-  width: 100%;
+  width: 60%;
   border: 3px var(--StandInWhite) solid;
 }
 
 @media screen and (min-width: 720px) and (max-width: 1028px) {
   .gameimg {
-    width: 70%;
+    width: 40%;
   }
 }
 
 @media screen and (min-width: 1028px) {
   .gameimg {
-    width: 40%;
+    width: 20%;
   }
 }

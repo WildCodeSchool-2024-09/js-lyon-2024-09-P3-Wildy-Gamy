@@ -94,13 +94,7 @@ function GameDetail() {
             <h3>Explication du jeu</h3>
             <p>{game.principle}</p>
           </figure>
-          {game.is_playable === 0 ? (
-            <p>Bientôt jouable en salle</p>
-          ) : (
-            <Link to={`/${game.name}`} className="playButton">
-              Jouer
-            </Link>
-          )}
+
           {auth !== null &&
             (fav === 1 ? (
               <section className="ensemble">
@@ -118,6 +112,13 @@ function GameDetail() {
               </section>
             ))}
           <img className="gameimg" src={game.image} alt={game.name} />
+          {game.is_playable === 0 ? (
+            <p>Bientôt jouable en salle</p>
+          ) : (
+            <Link to={`/${game.name}`} className="button-24">
+              Jouer
+            </Link>
+          )}
           {game.in_room === 0 ? (
             <p>Bientôt dans vos salles</p>
           ) : (
