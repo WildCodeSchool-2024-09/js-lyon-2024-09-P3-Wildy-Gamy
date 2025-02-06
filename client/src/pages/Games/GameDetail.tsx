@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import "./GameDetail.css";
-import emptyHeart from "../../assets/images/empty-heart.svg";
-import fullHeart from "../../assets/images/full-heart.svg";
+import emptyHeart from "../../assets/images/empty-heart.png";
+import fleche from "../../assets/images/fleche.png";
+import fullHeart from "../../assets/images/full-heart.png";
 
 type User = {
   id: number;
@@ -84,6 +85,9 @@ function GameDetail() {
   return (
     game && (
       <div className={`${theme}`}>
+        <Link to="/games" className="return">
+          <img src={fleche} alt="Retourner voir plus de jeux" />
+        </Link>
         <figure className="detail">
           <h2>{game.name}</h2>
           <figure className="ensemble">

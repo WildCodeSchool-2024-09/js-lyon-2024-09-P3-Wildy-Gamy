@@ -15,6 +15,11 @@
   }
 }
 
+.return img {
+  height: 50px;
+  padding-top: 10px;
+}
+
 .dark {
   body {
     background-color: var(--StandInBlack);
