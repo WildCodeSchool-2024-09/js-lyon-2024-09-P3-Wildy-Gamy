@@ -10,6 +10,12 @@ type Lot = {
   image: string;
 };
 
+type LotAccount = {
+  lot_id: number;
+  lot_image: string;
+  user_id: number;
+};
+
 class lotRepository {
   // The Rs of CRUD - Read operations
 
@@ -30,6 +36,22 @@ class lotRepository {
 
     // Return the array of items
     return rows as Lot[];
+  }
+
+  async readImage(id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      "select l.id as lot_id, l.image as lot_image, u.id as user_id from exchanges e join lots l on e.id_lots = l.id join user u on e.id_user = u.id where e.id_user = ?",
+      [id],
+    );
+    return rows as LotAccount[];
+  }
+
+  async updateNbLot(lotId: number) {
+    const [result] = await databaseClient.query<Result>(
+      "update lots set nb_lots = nb_lots - 1 where id = ? and nb_lots > 0;",
+      [lotId],
+    );
+    return result.affectedRows;
   }
 }
 

@@ -1,5 +1,30 @@
-.pacman {
-  margin: 5vw 20vw 0vw 20vw;
+.pacman-div {
+  margin: 2vw 20vw 0vw 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+.true {
+  position: absolute;
+  z-index: 999;
+  text-align: center;
+  align-content: center;
+  height: 436px;
+  width: 336px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.false {
+  opacity: 0%;
+}
+
+.running-score {
+  display: none;
+}
+
+.pacman-information {
+  margin-bottom: 5px;
 }
 
 #score {
@@ -37,6 +62,10 @@
 }
 
 @media (min-width: 768px) {
+  .pacman-information {
+    display: flex;
+  }
+
   .button-74 {
     min-width: 120px;
     padding: 0 25px;

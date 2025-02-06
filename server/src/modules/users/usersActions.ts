@@ -1,6 +1,7 @@
 import argon2 from "argon2";
 import type { RequestHandler } from "express";
 import { hashingOptions } from "../auth/authActions";
+import scoresRepository from "../scores/scoresRepository";
 import usersRepository from "./usersRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -101,13 +102,52 @@ const editPassword: RequestHandler = async (req, res, next) => {
   }
 };
 
+const editPoints: RequestHandler = async (req, res, next) => {
+  try {
+    const user = {
+      id: Number.parseInt(req.params.id),
+    };
+    if (user.id == null) {
+      res.sendStatus(400).json({});
+    } else {
+      const affectedRows = await usersRepository.updatePoints(user.id);
+      if (affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(201);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const editBuyLot: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.id);
+    if (userId === 0) {
+      res.sendStatus(404);
+    } else {
+      const affectedRows = await usersRepository.updateBuyLot(userId);
+      if (affectedRows == null) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(201);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const add: RequestHandler = async (req, res, next) => {
   try {
     const newUser = {
       pseudo: req.body.pseudo,
       email: req.body.email,
       hashed_password: req.body.hashed_password,
-      image: req.body.image,
+      image:
+        "https://s2.qwant.com/thumbr/474x471/d/2/dbb9a1d2db6753db4980e0a26fd79b94cc6314e6164bafacec2a4efbf82872/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.KJolamr1d03TN81cejXYkwAAAA%26pid%3DApi&q=0&b=1&p=0&a=0",
     };
 
     if (
@@ -117,9 +157,9 @@ const add: RequestHandler = async (req, res, next) => {
     ) {
       res.sendStatus(400).json({});
     } else {
-      const insertId = await usersRepository.create(newUser);
+      req.body.id_user = await usersRepository.create(newUser);
 
-      res.status(201).json({ insertId });
+      next();
     }
   } catch (err) {
     next(err);
@@ -129,6 +169,8 @@ const add: RequestHandler = async (req, res, next) => {
 const destroy: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number.parseInt(req.params.id);
+    const affectedRowsScores = await scoresRepository.delete(userId);
+
     const affectedRows = await usersRepository.delete(userId);
 
     if (affectedRows === 0) {
@@ -141,4 +183,13 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, edit, editPassword, add, destroy };
+export default {
+  browse,
+  read,
+  edit,
+  editPassword,
+  editPoints,
+  editBuyLot,
+  add,
+  destroy,
+};

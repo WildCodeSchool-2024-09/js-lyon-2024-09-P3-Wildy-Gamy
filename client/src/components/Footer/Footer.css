@@ -4,6 +4,7 @@
   justify-content: space-around;
   align-items: center;
   text-align: center;
+  background-color: var(--StandInBlack);
 }
 
 .footer-claire {
@@ -27,4 +28,5 @@ footer img {
 
 footer {
   padding: 5px;
+  margin-top: auto;
 }

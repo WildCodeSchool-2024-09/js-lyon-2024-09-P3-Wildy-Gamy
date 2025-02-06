@@ -76,13 +76,15 @@ function PasswordForm({ onSubmit }: AccountFormProps) {
 
       <div className="form-container">
         {/* Champ pour la confirmation du mot de passe */}
-        <label htmlFor="confirm-password">Confirm password</label>{" "}
+        <label htmlFor="confirm-password">
+          Confirmez votre nouveau mot de passe
+        </label>{" "}
         <input
           type="password"
           id="confirm-password"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
-          placeholder="Confirm your password"
+          placeholder="Confirmez votre nouveau mot de passe"
           className="form-input"
         />{" "}
         {/* Indicateur de correspondance avec le mot de passe */}

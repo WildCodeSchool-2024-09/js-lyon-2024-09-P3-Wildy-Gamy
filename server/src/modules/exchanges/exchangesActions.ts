@@ -33,7 +33,7 @@ const read: RequestHandler = async (req, res, next) => {
 const add: RequestHandler = async (req, res, next) => {
   try {
     const newExchange = {
-      id: req.body.id,
+      id: Number(req.params.id),
       id_lots: req.body.id_lots,
       id_user: req.body.id_user,
     };
@@ -48,6 +48,31 @@ const add: RequestHandler = async (req, res, next) => {
       const insertId = await exchangesRepository.create(newExchange);
 
       res.status(201).json({ insertId });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const addBuyLot: RequestHandler = async (req, res, next) => {
+  try {
+    const lot = {
+      id: Number(req.params.id),
+      id_user: Number(req.body.id_user),
+      id_lot: Number(req.body.id_lot),
+    };
+    if (lot.id_lot == null) {
+      res.sendStatus(404);
+    } else {
+      const affectedRows = await exchangesRepository.addBuyLot(
+        lot.id_user,
+        lot.id_lot,
+      );
+      if (affectedRows == null) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(201);
+      }
     }
   } catch (err) {
     next(err);
@@ -69,4 +94,4 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add, destroy };
+export default { browse, read, add, addBuyLot, destroy };

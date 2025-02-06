@@ -7,6 +7,7 @@ import "./Account.css";
 type User = {
   id: number;
   pseudo: string;
+  points: number;
   email: string;
   is_admin: boolean;
   image: string;
@@ -19,6 +20,7 @@ type Auth = {
 
 interface AuthProps {
   auth: Auth | null;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
 }
 
 interface scoreProps {
@@ -27,17 +29,50 @@ interface scoreProps {
   score: number;
 }
 
+interface userProps {
+  id: number;
+  pseudo: string;
+  points: number;
+  email: string;
+  is_admin: boolean;
+  image: string;
+}
+
+interface lotsProps {
+  lot_id: number;
+  lot_image: string;
+  user_id: number;
+}
+
 function Account() {
-  const { auth } = useOutletContext<AuthProps>();
+  const { auth, setAuth } = useOutletContext<AuthProps>();
   const navigate = useNavigate();
   const id = auth?.user.id;
   const [scores, setScores] = useState<scoreProps[]>([] as [] | scoreProps[]);
+  const [user, setUser] = useState<userProps | null>(null);
+  const [lots, setLots] = useState<lotsProps[]>([]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/gamesScores/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setScores(data);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/lotsImage/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setLots(data);
       });
   }, [id]);
 
@@ -62,42 +97,73 @@ function Account() {
     }
   };
 
+  const handleLogout = () => {
+    setAuth(null);
+    navigate("/login");
+  };
+
   return (
     <>
       <section className="account">
         {auth != null && (
           <section className="accountInfo">
-            <article className="ensemble">
-              <h4>Votre pseudo</h4>
-              <p>{auth.user.pseudo}</p>
-            </article>
-            <article className="ensemble">
-              <h4>Votre email</h4>
-              <p>{auth.user.email}</p>
-            </article>
-            <article className="ensemble">
-              <h4>Votre image</h4>
-              <img src={auth.user.image} alt="user profile" />
-            </article>
-            <div>
-              {scores.map((score) => (
-                <article className="ensemble" key={score.id}>
-                  <GameScore data={score} />
+            <section>
+              <div className="infoUser">
+                <article className="ensemble">
+                  <h4>pseudo :</h4>
+                  <p>{auth.user.pseudo}</p>
                 </article>
+                <article className="ensemble">
+                  <h4>email :</h4>
+                  <p>{auth.user.email}</p>
+                </article>
+                <article className="ensemble">
+                  <h4>image :</h4>
+                  <img src={auth.user.image} alt="user profile" />
+                </article>
+              </div>
+            </section>
+            <section className="parentScore">
+              {scores.map((score) => (
+                <div className="accountScores" key={score.id}>
+                  <article className="ensemble">
+                    <GameScore data={score} />
+                  </article>
+                </div>
               ))}
-            </div>
+              <article className="ensemble">
+                <h4>points:</h4>
+                <p>{user?.points}</p>
+              </article>
+            </section>
+            <article className="ensemble">
+              <h4>Lots obtenu :</h4>
+              <div className="lotObtenu">
+                {lots.map((lot) => (
+                  <img key={lot.user_id} src={lot.lot_image} alt="lot obtenu" />
+                ))}
+              </div>
+            </article>
           </section>
         )}
-        <Link className="submit-btn" to="/accountedit">
-          Modifier les informations
-        </Link>
-        <button
-          type="button"
-          className="button-24"
-          onClick={() => handleDelete(id)}
-        >
-          Supprimer Compte
-        </button>
+        <section className="buttonS">
+          <Link className="button-24" to="/accountedit">
+            Modifier les informations
+          </Link>
+          <button type="button" className="button-24" onClick={handleLogout}>
+            Se déconnecter
+          </button>
+          <button
+            type="button"
+            className="button-24"
+            onClick={() => {
+              handleDelete(id);
+              handleLogout();
+            }}
+          >
+            Supprimer Compte
+          </button>
+        </section>
       </section>
     </>
   );

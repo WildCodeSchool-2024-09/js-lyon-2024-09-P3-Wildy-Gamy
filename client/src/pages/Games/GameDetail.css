@@ -9,6 +9,17 @@
   gap: 10px;
 }
 
+.ensemble {
+  img {
+    width: 30px;
+  }
+}
+
+.return img {
+  height: 50px;
+  padding-top: 10px;
+}
+
 .dark {
   body {
     background-color: var(--StandInBlack);
@@ -25,12 +36,10 @@
     color: var(--LightBg);
   }
   .ensemble {
-    background-color: var(--DarkBg);
+    background-color: var(--StandInBlack);
+    border: solid 5px var(--LightBg);
+    border-radius: 15px;
     padding: 10px;
-    border-top: 5px var(--DarkShadow) solid;
-    border-bottom: 5px var(--DarkShadow) solid;
-    border-left: 5px var(--DarkShadow2) solid;
-    border-right: 5px var(--DarkShadow2) solid;
   }
 }
 
@@ -78,18 +87,18 @@
 }
 
 .gameimg {
-  width: 100%;
+  width: 60%;
   border: 3px var(--StandInWhite) solid;
 }
 
 @media screen and (min-width: 720px) and (max-width: 1028px) {
   .gameimg {
-    width: 70%;
+    width: 40%;
   }
 }
 
 @media screen and (min-width: 1028px) {
   .gameimg {
-    width: 40%;
+    width: 20%;
   }
 }

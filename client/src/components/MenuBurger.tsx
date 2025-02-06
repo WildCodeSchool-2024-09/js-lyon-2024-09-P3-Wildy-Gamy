@@ -29,22 +29,22 @@ export default function Menu({ auth }: AuthProps) {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/About">About</Link>
+            <Link to="/About">A propos</Link>
           </li>
           <li>
-            <Link to="/Games">Games</Link>
+            <Link to="/Games">Jeux</Link>
           </li>
           <li>
             <Link to="/Lots">Lots</Link>
           </li>
           {auth === null && (
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login">Connexion</Link>
             </li>
           )}
           {auth !== null && (
             <li>
-              <Link to="/account">Account</Link>
+              <Link to="/account">Compte</Link>
             </li>
           )}
         </ul>

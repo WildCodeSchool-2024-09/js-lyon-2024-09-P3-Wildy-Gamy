@@ -42,7 +42,7 @@ function Input({ setGames }: setGamesProps) {
         <input
           className="input"
           name="myInput"
-          placeholder="Find a game"
+          placeholder="Trouvez un jeu"
           type="text"
           onChange={(e: { currentTarget: { value: string } }) =>
             parseInput(e.currentTarget.value)

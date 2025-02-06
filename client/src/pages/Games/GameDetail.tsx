@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import "./GameDetail.css";
+import emptyHeart from "../../assets/images/empty-heart.png";
+import fleche from "../../assets/images/fleche.png";
+import fullHeart from "../../assets/images/full-heart.png";
 
 type User = {
   id: number;
@@ -82,36 +85,41 @@ function GameDetail() {
   return (
     game && (
       <div className={`${theme}`}>
+        <Link to="/games" className="return">
+          <img src={fleche} alt="Retourner voir plus de jeux" />
+        </Link>
         <figure className="detail">
           <h2>{game.name}</h2>
           <figure className="ensemble">
             <h3>Explication du jeu</h3>
             <p>{game.principle}</p>
           </figure>
-          {game.is_playable === 0 ? (
-            <p>Bientôt jouable en salle</p>
-          ) : (
-            <Link to={`/${game.name}`} className="playButton">
-              Jouer
-            </Link>
-          )}
+
           {auth !== null &&
             (fav === 1 ? (
-              <section>
+              <section className="ensemble">
                 <p>Un de vos jeux favoris!</p>
                 <button type="button" onClick={HandleClick}>
-                  <img src="" alt="full heart" />
+                  <img src={fullHeart} alt="full heart" />
                 </button>
               </section>
             ) : (
-              <section>
+              <section className="ensemble">
                 <p>Ce jeu ne fait pas parti de vos favoris.</p>
                 <button type="button" onClick={HandleClick}>
-                  <img src="" alt="empty heart" />
+                  <img src={emptyHeart} alt="empty heart" />
                 </button>
               </section>
             ))}
+          {game.is_playable === 0 ? (
+            <p>Bientôt jouable en salle</p>
+          ) : (
+            <Link to={`/${game.name}`} className="button-24">
+              Jouer
+            </Link>
+          )}
           <img className="gameimg" src={game.image} alt={game.name} />
+
           {game.in_room === 0 ? (
             <p>Bientôt dans vos salles</p>
           ) : (

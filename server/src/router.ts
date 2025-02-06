@@ -13,6 +13,7 @@ import exchangesActions from "./modules/exchanges/exchangesActions";
 router.get("/api/exchanges", exchangesActions.browse);
 router.get("/api/exchanges/:id", exchangesActions.read);
 router.post("/api/exchanges", exchangesActions.add);
+router.post("/api/exchangesLot/:id", exchangesActions.addBuyLot);
 router.delete("/api/exchanges/:id", exchangesActions.destroy);
 
 // ************************************************************************* */
@@ -40,6 +41,8 @@ import lotActions from "./modules/lot/lotActions";
 
 router.get("/api/lots", lotActions.browse);
 router.get("/api/lots/:id", lotActions.read);
+router.get("/api/lotsImage/:id", lotActions.readImage);
+router.put("/api/lotsNbPoints/:id", lotActions.editNbLot);
 
 /* ************************************************************************* */
 
@@ -48,6 +51,8 @@ import usersActions from "./modules/users/usersActions";
 router.get("/api/users", usersActions.browse);
 router.get("/api/users/:id", usersActions.read);
 router.put("/api/users/:id", usersActions.edit);
+router.put("/api/usersPoints/:id", usersActions.editPoints);
+router.put("/api/usersBuyPoints/:id", usersActions.editBuyLot);
 router.delete("/api/users/:id", usersActions.destroy);
 
 /* ************************************************************************* */

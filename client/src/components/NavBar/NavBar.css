@@ -35,11 +35,27 @@ nav {
     text-decoration: none;
     color: var(--BarkBg);
   }
+  div ul li {
+    a:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 #dark {
   div ul li a {
     text-decoration: none;
     color: var(--LightBg);
+  }
+  div ul li {
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  div ul li a {
+    font-size: large;
   }
 }
