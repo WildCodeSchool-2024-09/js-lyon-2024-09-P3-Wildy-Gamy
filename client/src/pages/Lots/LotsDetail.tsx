@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./LotsDetail.css";
 
 interface lotProps {
@@ -92,7 +93,7 @@ function LotDetail() {
       if (user == null || lot == null) {
         console.error("user or lot is null");
       } else if (user.points < lot.nb_points_needed) {
-        alert("Vous n'avez pas assez de points");
+        toast.error("Vous n'avez pas assez de points");
         return;
       }
       const response = await fetch(

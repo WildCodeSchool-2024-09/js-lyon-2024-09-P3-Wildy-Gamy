@@ -3,6 +3,7 @@ import { useRef } from "react";
 import type { FormEventHandler } from "react";
 
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type User = {
   id: number;
@@ -51,6 +52,7 @@ function Login() {
 
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 200) {
+        toast.info("vous etes bien connecté");
         const user = await response.json();
 
         setAuth(user);
@@ -58,6 +60,7 @@ function Login() {
         navigate("/");
       } else {
         // Log des détails de la réponse en cas d'échec
+        toast.error("mot de passe ou mail invalide !");
         console.info(response);
       }
     } catch (err) {
