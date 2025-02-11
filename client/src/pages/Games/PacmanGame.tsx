@@ -2,6 +2,7 @@ import Pacman from "pacman-react";
 import { useEffect, useState } from "react";
 import { render } from "react-dom";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./PacmanGame.css";
 import fleche from "../../assets/images/fleche.png";
 render(<Pacman />, document.getElementById("root"));
@@ -82,7 +83,7 @@ function PacmanGame() {
 
   const handleClick = () => {
     if (auth == null) {
-      alert("Veuillez vous connecter pour enregistrer votre score");
+      toast.error("Veuillez vous connecter pour enregistrer votre score");
     } else {
       handlePoints();
       handleScore();
@@ -94,7 +95,9 @@ function PacmanGame() {
       if (user == null) {
         console.error("user is null");
       } else if (user.points - newScore > newScore) {
-        alert("Votre score est inferieur a vos points!!");
+        toast.error(
+          "Votre score est inferieur a vos points rejouer et battez votre record!!",
+        );
         return;
       }
 
@@ -157,7 +160,7 @@ function PacmanGame() {
             handleClick();
           }}
         >
-          Update Points
+          Enregister Points
         </button>
       </section>
       <section>
