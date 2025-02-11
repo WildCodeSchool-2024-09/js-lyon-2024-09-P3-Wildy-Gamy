@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import GameScore from "../../components/AccountForm/Account/AccountGamesScores";
 import "./Account.css";
 
@@ -88,6 +89,7 @@ function Account() {
         },
       );
       if (response.status === 204) {
+        toast.info("Vous avez supprimé votre compte");
         navigate("/login");
       } else {
         console.info(response);
@@ -99,6 +101,7 @@ function Account() {
 
   const handleLogout = () => {
     setAuth(null);
+    toast.info("Vous etes deconnecté");
     navigate("/login");
   };
 
