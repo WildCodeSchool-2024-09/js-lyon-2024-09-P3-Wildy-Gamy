@@ -5,7 +5,6 @@ import AccountForm from "../../components/AccountForm/AccountForm";
 import PasswordForm from "../../components/AccountForm/PasswordForm";
 
 type User = {
-  id: number;
   pseudo: string;
   email: string;
   is_admin: boolean;
@@ -29,8 +28,8 @@ type Error = {
 
 function AccountEdit() {
   const navigate = useNavigate();
-
   const { auth, setAuth } = useOutletContext<AuthProps>();
+  const token = auth?.token;
   const [error, setError] = useState(null as null | Error[]);
 
   return (
@@ -42,16 +41,14 @@ function AccountEdit() {
           <AccountForm
             defaultValue={auth.user}
             onSubmit={(AccountData) => {
-              fetch(
-                `${import.meta.env.VITE_API_URL}/api/users/${auth.user.id}`,
-                {
-                  method: "put",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(AccountData),
+              fetch(`${import.meta.env.VITE_API_URL}/api/users`, {
+                method: "put",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
                 },
-              )
+                body: JSON.stringify(AccountData),
+              })
                 .then(async (response) => response.json())
                 .then((data) => {
                   try {
@@ -86,16 +83,14 @@ function AccountEdit() {
         {auth && (
           <PasswordForm
             onSubmit={(PasswordData) => {
-              fetch(
-                `${import.meta.env.VITE_API_URL}/api/users_password/${auth.user.id}`,
-                {
-                  method: "put",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(PasswordData),
+              fetch(`${import.meta.env.VITE_API_URL}/api/users_password`, {
+                method: "put",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
                 },
-              )
+                body: JSON.stringify(PasswordData),
+              })
                 .then(async (response) => response.json())
                 .then((data) => {
                   try {

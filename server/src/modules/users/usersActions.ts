@@ -16,7 +16,7 @@ const browse: RequestHandler = async (req, res, next) => {
 
 const read: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.params.id);
+    const userId = Number(req.body.auth.id);
     const user = await usersRepository.read(userId);
 
     if (user == null) {
@@ -32,7 +32,7 @@ const read: RequestHandler = async (req, res, next) => {
 const edit: RequestHandler = async (req, res, next) => {
   try {
     const user = {
-      id: Number.parseInt(req.params.id),
+      id: Number(req.body.auth.id),
       pseudo: req.body.pseudo,
       email: req.body.email,
       image: req.body.image,
@@ -57,7 +57,7 @@ const edit: RequestHandler = async (req, res, next) => {
 const editPassword: RequestHandler = async (req, res, next) => {
   try {
     const user = {
-      id: Number.parseInt(req.params.id),
+      id: Number(req.body.auth.id),
       password: req.body.password,
       newPassword: req.body.newPassword,
       email: req.body.email,
@@ -105,7 +105,7 @@ const editPassword: RequestHandler = async (req, res, next) => {
 const editPoints: RequestHandler = async (req, res, next) => {
   try {
     const user = {
-      id: Number.parseInt(req.params.id),
+      id: Number(req.body.auth.id),
     };
     if (user.id == null) {
       res.sendStatus(400).json({});
@@ -124,7 +124,7 @@ const editPoints: RequestHandler = async (req, res, next) => {
 
 const editBuyLot: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.params.id);
+    const userId = Number(req.body.auth.id);
     if (userId === 0) {
       res.sendStatus(404);
     } else {
@@ -168,7 +168,7 @@ const add: RequestHandler = async (req, res, next) => {
 
 const destroy: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number.parseInt(req.params.id);
+    const userId = Number(req.body.auth.id);
     const affectedRowsScores = await scoresRepository.delete(userId);
 
     const affectedRows = await usersRepository.delete(userId);

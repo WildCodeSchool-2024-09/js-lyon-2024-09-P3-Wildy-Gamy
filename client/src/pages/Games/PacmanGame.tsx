@@ -7,7 +7,6 @@ import fleche from "../../assets/images/fleche.png";
 render(<Pacman />, document.getElementById("root"));
 
 type User = {
-  id: number;
   id_user: number;
   pseudo: string;
   email: string;
@@ -26,7 +25,6 @@ interface AuthProps {
 }
 
 interface userProps {
-  id: number;
   pseudo: string;
   points: number;
   email: string;
@@ -36,7 +34,8 @@ interface userProps {
 
 function PacmanGame() {
   const { auth } = useOutletContext<AuthProps>();
-  const id_user = auth?.user.id;
+
+  const token = auth?.token;
   const id_game = 1;
   const navigate = useNavigate();
   const [timeSpent, setTimeSpent] = useState(0);
@@ -51,12 +50,18 @@ function PacmanGame() {
   }, []);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id_user}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
       });
-  }, [id_user]);
+  }, [token]);
 
   useEffect(() => {
     if (isGameOver) return;
@@ -94,14 +99,14 @@ function PacmanGame() {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/scores/${id_user}`,
+        `${import.meta.env.VITE_API_URL}/api/scores`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            id_user: id_user,
             newScore: newScore,
             id_game: id_game,
           }),
@@ -119,15 +124,13 @@ function PacmanGame() {
   const handlePoints = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/usersPoints/${id_user}`,
+        `${import.meta.env.VITE_API_URL}/api/usersPoints`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            id: id_user,
-          }),
         },
       );
 
