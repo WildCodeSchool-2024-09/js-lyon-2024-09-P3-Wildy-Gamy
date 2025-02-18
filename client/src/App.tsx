@@ -7,8 +7,8 @@ import NavBar from "./components/NavBar/NavBar";
 import { useTheme } from "./context/ThemeContext";
 
 type User = {
-  id: number;
   pseudo: string;
+  points: number;
   email: string;
   is_admin: boolean;
   image: string;

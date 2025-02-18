@@ -6,7 +6,6 @@ import GameScore from "../../components/AccountForm/Account/AccountGamesScores";
 import "./Account.css";
 
 type User = {
-  id: number;
   pseudo: string;
   points: number;
   email: string;
@@ -31,7 +30,6 @@ interface scoreProps {
 }
 
 interface userProps {
-  id: number;
   pseudo: string;
   points: number;
   email: string;
@@ -48,43 +46,62 @@ interface lotsProps {
 function Account() {
   const { auth, setAuth } = useOutletContext<AuthProps>();
   const navigate = useNavigate();
-  const id = auth?.user.id;
+  const token = auth?.token;
   const [scores, setScores] = useState<scoreProps[]>([] as [] | scoreProps[]);
   const [user, setUser] = useState<userProps | null>(null);
   const [lots, setLots] = useState<lotsProps[]>([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/gamesScores/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/gamesScores`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setScores(data);
       });
-  }, [id]);
+  }, [token]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
       });
-  }, [id]);
+  }, [token]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/lotsImage/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/lotsImage`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setLots(data);
       });
-  }, [id]);
+  }, [token]);
 
-  const handleDelete = async (id: number | undefined) => {
+  const handleDelete = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/users`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -139,14 +156,21 @@ function Account() {
                 <p>{user?.points}</p>
               </article>
             </section>
-            <article className="ensemble">
-              <h4>Lots obtenu :</h4>
-              <div className="lotObtenu">
-                {lots.map((lot) => (
-                  <img key={lot.user_id} src={lot.lot_image} alt="lot obtenu" />
-                ))}
-              </div>
-            </article>
+            {lots.length !== 0 && (
+              <article className="ensemble">
+                <h4>Lots obtenu :</h4>
+                <div className="lotObtenu">
+                  {lots.length !== 0 &&
+                    lots.map((lot) => (
+                      <img
+                        key={lot.user_id}
+                        src={lot.lot_image}
+                        alt="lot obtenu"
+                      />
+                    ))}
+                </div>
+              </article>
+            )}
           </section>
         )}
         <section className="buttonS">
@@ -160,7 +184,7 @@ function Account() {
             type="button"
             className="button-24"
             onClick={() => {
-              handleDelete(id);
+              handleDelete();
               handleLogout();
             }}
           >

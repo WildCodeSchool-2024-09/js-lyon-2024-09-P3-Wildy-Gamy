@@ -40,7 +40,7 @@ class lotRepository {
 
   async readImage(id: number) {
     const [rows] = await databaseClient.query<Rows>(
-      "select l.id as lot_id, l.image as lot_image, u.id as user_id from exchanges e join lots l on e.id_lots = l.id join user u on e.id_user = u.id where e.id_user = ?",
+      "select l.id as lot_id, l.image as lot_image, u.id as user_id from exchanges join lots l on exchanges.id_lots = l.id join user u on exchanges.id_user = u.id where exchanges.id_user = ?",
       [id],
     );
     return rows as LotAccount[];

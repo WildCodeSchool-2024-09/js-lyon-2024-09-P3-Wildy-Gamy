@@ -16,7 +16,7 @@ const read: RequestHandler = async (req, res, next) => {
     const exchangeId = {
       id: Number(req.params.id),
       id_lots: Number(req.body.id_lots),
-      id_user: Number(req.body.id_user),
+      id_user: Number(req.body.auth.id),
     };
     const exchange = await exchangesRepository.read(exchangeId);
 
@@ -35,7 +35,7 @@ const add: RequestHandler = async (req, res, next) => {
     const newExchange = {
       id: Number(req.params.id),
       id_lots: req.body.id_lots,
-      id_user: req.body.id_user,
+      id_user: Number(req.body.auth.id),
     };
 
     if (
@@ -58,7 +58,7 @@ const addBuyLot: RequestHandler = async (req, res, next) => {
   try {
     const lot = {
       id: Number(req.params.id),
-      id_user: Number(req.body.id_user),
+      id_user: Number(req.body.auth.id),
       id_lot: Number(req.body.id_lot),
     };
     if (lot.id_lot == null) {

@@ -15,7 +15,7 @@ const readFav: RequestHandler = async (req, res, next) => {
   try {
     const ids = {
       id_game: Number.parseInt(req.query.id_game as string),
-      id_user: Number.parseInt(req.query.id_user as string),
+      id_user: Number(req.body.auth.id),
     };
 
     if (ids.id_game == null || ids.id_user == null) {
@@ -35,7 +35,7 @@ const readFav: RequestHandler = async (req, res, next) => {
 
 const readAllFav: RequestHandler = async (req, res, next) => {
   try {
-    const id_user = Number.parseInt(req.query.id_user as string);
+    const id_user = Number(req.body.auth.id);
 
     if (id_user == null) {
       res.sendStatus(400).json({});
@@ -54,7 +54,7 @@ const editFav: RequestHandler = async (req, res, next) => {
     const score = {
       is_fav: Boolean(req.body.is_fav),
       id_game: Number(req.body.id_game),
-      id_user: Number(req.body.id_user),
+      id_user: Number(req.body.auth.id),
     };
 
     if (score.id_game == null || score.id_user == null) {
@@ -75,7 +75,7 @@ const editFav: RequestHandler = async (req, res, next) => {
 
 const read: RequestHandler = async (req, res, next) => {
   try {
-    const scoreId = Number(req.params.id);
+    const scoreId = Number(req.body.auth.id);
     const score = await scoresRepository.read(scoreId);
 
     if (score == null) {
@@ -91,7 +91,7 @@ const read: RequestHandler = async (req, res, next) => {
 const editScores: RequestHandler = async (req, res, next) => {
   try {
     const score = {
-      id_user: Number(req.params.id),
+      id_user: Number(req.body.auth.id),
       newScore: Number(req.body.newScore),
       id_game: Number(req.body.id_game),
     };

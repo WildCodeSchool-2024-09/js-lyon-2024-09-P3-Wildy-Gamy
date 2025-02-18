@@ -39,7 +39,7 @@ const read: RequestHandler = async (req, res, next) => {
 
 const readImage: RequestHandler = async (req, res, next) => {
   try {
-    const lotId = Number(req.params.id);
+    const lotId = Number(req.body.auth.id);
     const lot = await lotRepository.readImage(lotId);
 
     if (lot == null) {
