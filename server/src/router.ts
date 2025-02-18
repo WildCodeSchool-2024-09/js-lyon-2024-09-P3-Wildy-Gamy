@@ -13,7 +13,11 @@ import exchangesActions from "./modules/exchanges/exchangesActions";
 router.get("/api/exchanges", exchangesActions.browse);
 router.get("/api/exchanges/:id", exchangesActions.read);
 router.post("/api/exchanges", exchangesActions.add);
-router.post("/api/exchangesLot/:id", exchangesActions.addBuyLot);
+router.post(
+  "/api/exchangesLot",
+  authActions.verifyToken,
+  exchangesActions.addBuyLot,
+);
 router.delete("/api/exchanges/:id", exchangesActions.destroy);
 
 // ************************************************************************* */
