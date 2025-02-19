@@ -2,7 +2,6 @@ import { type ChangeEventHandler, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
 type User = {
-  id: number;
   pseudo: string;
   email: string;
   is_admin: boolean;

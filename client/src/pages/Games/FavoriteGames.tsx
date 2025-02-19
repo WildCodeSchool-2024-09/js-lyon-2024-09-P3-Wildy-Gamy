@@ -6,7 +6,6 @@ import { Carousel } from "react-responsive-carousel";
 import { useOutletContext } from "react-router-dom";
 
 type User = {
-  id: number;
   pseudo: string;
   email: string;
   is_admin: boolean;
@@ -34,19 +33,23 @@ interface gameProps {
 
 function FavoritesList() {
   const { auth } = useOutletContext<AuthProps>();
+  const token = auth?.token;
   const [games, setGames] = useState([] as [] | gameProps[]);
 
-  const id = new URLSearchParams({
-    id_user: `${auth?.user.id}`,
-  }).toString();
-  if (auth != null && auth.user.id !== null) {
+  if (auth != null && token !== null) {
     useEffect(() => {
-      fetch(`${import.meta.env.VITE_API_URL}/api/allfavorites?${id}`)
+      fetch(`${import.meta.env.VITE_API_URL}/api/allfavorites`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((response) => response.json())
         .then((data) => {
           setGames(data);
         });
-    }, [id]);
+    }, [token]);
   }
 
   return (

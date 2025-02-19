@@ -2,12 +2,12 @@ import Pacman from "pacman-react";
 import { useEffect, useState } from "react";
 import { render } from "react-dom";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./PacmanGame.css";
 import fleche from "../../assets/images/fleche.png";
 render(<Pacman />, document.getElementById("root"));
 
 type User = {
-  id: number;
   id_user: number;
   pseudo: string;
   email: string;
@@ -26,7 +26,6 @@ interface AuthProps {
 }
 
 interface userProps {
-  id: number;
   pseudo: string;
   points: number;
   email: string;
@@ -36,7 +35,8 @@ interface userProps {
 
 function PacmanGame() {
   const { auth } = useOutletContext<AuthProps>();
-  const id_user = auth?.user.id;
+
+  const token = auth?.token;
   const id_game = 1;
   const navigate = useNavigate();
   const [timeSpent, setTimeSpent] = useState(0);
@@ -51,12 +51,18 @@ function PacmanGame() {
   }, []);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/users/${id_user}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
       });
-  }, [id_user]);
+  }, [token]);
 
   useEffect(() => {
     if (isGameOver) return;
@@ -77,7 +83,7 @@ function PacmanGame() {
 
   const handleClick = () => {
     if (auth == null) {
-      alert("Veuillez vous connecter pour enregistrer votre score");
+      toast.error("Veuillez vous connecter pour enregistrer votre score");
     } else {
       handlePoints();
       handleScore();
@@ -89,19 +95,21 @@ function PacmanGame() {
       if (user == null) {
         console.error("user is null");
       } else if (user.points - newScore > newScore) {
-        alert("Votre score est inferieur a vos points!!");
+        toast.error(
+          "Votre score est inferieur a vos points rejouer et battez votre record!!",
+        );
         return;
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/scores/${id_user}`,
+        `${import.meta.env.VITE_API_URL}/api/scores`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            id_user: id_user,
             newScore: newScore,
             id_game: id_game,
           }),
@@ -119,15 +127,13 @@ function PacmanGame() {
   const handlePoints = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/usersPoints/${id_user}`,
+        `${import.meta.env.VITE_API_URL}/api/usersPoints`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            id: id_user,
-          }),
         },
       );
 
@@ -154,7 +160,7 @@ function PacmanGame() {
             handleClick();
           }}
         >
-          Update Points
+          Enregister Points
         </button>
       </section>
       <section>

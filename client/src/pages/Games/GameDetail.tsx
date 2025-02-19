@@ -7,7 +7,6 @@ import fleche from "../../assets/images/fleche.png";
 import fullHeart from "../../assets/images/full-heart.png";
 
 type User = {
-  id: number;
   pseudo: string;
   email: string;
   is_admin: boolean;
@@ -36,6 +35,7 @@ interface gameProps {
 function GameDetail() {
   const { auth } = useOutletContext<AuthProps>();
   const { theme } = useTheme();
+  const token = auth?.token;
   const { id } = useParams();
   const [game, setGame] = useState(null as null | gameProps);
   const [fav, setFav] = useState(0 as number);
@@ -50,15 +50,20 @@ function GameDetail() {
 
   const params = new URLSearchParams({
     id_game: `${id}`,
-    id_user: `${auth?.user.id}`,
   }).toString();
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/favorite?${params}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/favorite?${params}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setFav(data.is_fav);
       });
-  }, [params]);
+  }, [params, token]);
 
   const HandleClick = () => {
     let newFav = false;
@@ -73,11 +78,11 @@ function GameDetail() {
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         is_fav: newFav,
         id_game: id,
-        id_user: auth?.user.id,
       }),
     });
   };

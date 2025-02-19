@@ -5,7 +5,6 @@ import ThemeButton from "../Theme/ThemeButton";
 import "./NavBar.css";
 
 type User = {
-  id: number;
   pseudo: string;
   email: string;
   is_admin: boolean;

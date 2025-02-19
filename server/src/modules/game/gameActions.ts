@@ -39,7 +39,7 @@ const read: RequestHandler = async (req, res, next) => {
 
 const readScores: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.params.id);
+    const userId = Number(req.body.auth.id);
     const scores = await gameRepository.readScores(userId);
 
     if (scores == null) {

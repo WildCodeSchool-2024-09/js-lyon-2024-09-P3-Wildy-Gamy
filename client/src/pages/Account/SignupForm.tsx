@@ -4,6 +4,7 @@ import "./SignupForm.css";
 import type { ChangeEventHandler, FormEventHandler } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignupForm: React.FC = () => {
   const [error] = useState<string>("");
@@ -55,6 +56,7 @@ const SignupForm: React.FC = () => {
 
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 201) {
+        toast.info("Votre compte a bien été créé !");
         navigate("/login");
       } else {
         // Log des détails de la réponse en cas d'échec
