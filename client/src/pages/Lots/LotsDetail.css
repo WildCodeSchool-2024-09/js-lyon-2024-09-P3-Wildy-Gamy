@@ -5,6 +5,17 @@
   justify-content: center;
 }
 
+.lotDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .button-74 {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
+
 /* CSS */
 .button-74 {
   background-color: #fbeee0;
