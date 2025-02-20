@@ -26,19 +26,19 @@ function AccountForm({ children, defaultValue, onSubmit }: AccountFormProps) {
         onSubmit({ pseudo, email, image });
       }}
     >
-      <div className="form-container">
+      <div className="ensemble">
         <label htmlFor="pseudo">Pseudo</label>
         <input type="text" name="pseudo" defaultValue={defaultValue.pseudo} />
       </div>
-      <div className="form-container">
+      <div className="ensemble">
         <label htmlFor="email">Email</label>
         <input type="text" name="email" defaultValue={defaultValue.email} />
       </div>
-      <div className="form-container">
+      <div className="ensemble">
         <label htmlFor="image">Image</label>
         <input type="text" name="image" defaultValue={defaultValue.image} />
       </div>
-      <button className="submit-btn" type="submit">
+      <button className="button-24" type="submit">
         {children}
       </button>
     </form>
