@@ -60,11 +60,11 @@ function PasswordForm({ onSubmit }: AccountFormProps) {
         onSubmit({ password, newPassword, email });
       }}
     >
-      <div className="form-container">
+      <div className="ensemble">
         <label htmlFor="password">Mot de passe actuel</label>
         <input type="password" name="password" />
       </div>
-      <div className="form-container">
+      <div className="ensemble">
         <label htmlFor="newPassword">Nouveau mot de passe</label>
         <input
           type="password"
@@ -73,23 +73,25 @@ function PasswordForm({ onSubmit }: AccountFormProps) {
         />
       </div>
 
-      <div className="form-container">
+      <div className="ensemble">
         {/* Champ pour la confirmation du mot de passe */}
         <label htmlFor="confirm-password">
           Confirmez votre nouveau mot de passe
         </label>{" "}
-        <input
-          type="password"
-          id="confirm-password"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-          placeholder="Confirmez votre nouveau mot de passe"
-          className="form-input"
-        />{" "}
-        {/* Indicateur de correspondance avec le mot de passe */}
-        {newPassword === confirmPassword ? "✅" : "❌"}
+        <div>
+          <input
+            type="password"
+            id="confirm-password"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            placeholder="Confirmez votre nouveau mot de passe"
+            className="form-input"
+          />{" "}
+          {/* Indicateur de correspondance avec le mot de passe */}
+          {newPassword === confirmPassword ? "✅" : "❌"}
+        </div>
       </div>
-      <button className="submit-btn" type="submit">
+      <button className="button-24" type="submit">
         Modifier le mot de passe
       </button>
     </form>
