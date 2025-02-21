@@ -1,0 +1,7 @@
+.input {
+  color: var(--StandInBlack);
+  border: solid 1px var(--StandInWhite);
+  margin-top: 5px;
+  padding: 0.2%;
+  border-radius: 3px;
+}

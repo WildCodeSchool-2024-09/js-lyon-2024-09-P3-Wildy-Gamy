@@ -1,0 +1,106 @@
+.pacman-div {
+  margin: 2vw 20vw 0vw 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+.true {
+  position: absolute;
+  z-index: 999;
+  text-align: center;
+  align-content: center;
+  height: 436px;
+  width: 336px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.false {
+  opacity: 0%;
+}
+
+.running-score {
+  display: none;
+}
+
+.pacman-information {
+  margin-bottom: 5px;
+}
+
+#score {
+  margin: 0vw 0vw 27vw 0vw;
+  color: white;
+}
+
+/* CSS */
+.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .pacman-information {
+    display: flex;
+  }
+
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .pacman {
+    min-height: 30vh;
+  }
+  #score {
+    margin-left: 20%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .pacman {
+    margin-left: 10%;
+  }
+  #score {
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .pacman {
+    margin-left: 0%;
+  }
+  #score {
+    margin-left: 0%;
+  }
+}

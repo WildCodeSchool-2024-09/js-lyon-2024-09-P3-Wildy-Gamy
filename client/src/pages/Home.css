@@ -1,0 +1,51 @@
+.home {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 57px;
+  margin-bottom: 57px;
+}
+
+.home article {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--StandInBlack);
+  border: solid 5px var(--LightBg);
+  padding: 10px;
+  border-radius: 15px;
+  img {
+    width: 60%;
+  }
+  p {
+    color: var(--StandInWhite);
+    font-size: large;
+    font-family: monospace;
+    text-align: center;
+  }
+  a {
+    color: var(--StandInWhite);
+    text-decoration: underline;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .home {
+    gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  #fav {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  #allGames {
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+  .jeux {
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+}

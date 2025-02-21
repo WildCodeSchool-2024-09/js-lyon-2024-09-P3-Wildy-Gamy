@@ -1,0 +1,158 @@
+.accountInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding-bottom: 20px;
+  article {
+    img {
+      width: 40%;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    .ensemble {
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      div {
+        display: flex;
+        align-items: center;
+      }
+    }
+    button {
+      justify-self: center;
+      align-self: center;
+    }
+  }
+}
+
+.infoUser {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lotObtenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  gap: 10px;
+}
+
+.parentScore {
+  margin-top: 6%;
+}
+
+/* CSS */
+.button-24 {
+  background: #ff4742;
+  border: 1px solid #ff4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff4742;
+}
+
+.button-24:active {
+  opacity: 0.5;
+}
+
+.buttonS {
+  display: flex;
+  gap: 15px;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  a {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .accountInfo {
+    article {
+      img {
+        width: 60%;
+      }
+    }
+  }
+  .account {
+    a {
+      width: 40%;
+    }
+  }
+  .accountScores {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .accountInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    article {
+      img {
+        width: 40%;
+      }
+    }
+    .accountScores {
+      display: none;
+    }
+  }
+
+  .infoUser {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .lotObtenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+  }
+
+  .accountScores {
+    display: none;
+  }
+
+  .buttonS {
+    display: flex;
+    flex-direction: column;
+  }
+}
