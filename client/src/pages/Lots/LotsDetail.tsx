@@ -161,8 +161,14 @@ function LotDetail() {
               Nombres de {lot.name} existants : {lot.nb_lots}
             </h3>
             <p>Prix : {lot.nb_points_needed} pts</p>
-            <h4>Total des points :</h4>
-            <p>{user?.points}</p>
+            {user ? (
+              <div>
+                <h4>Total des points :</h4>
+                <p>{user?.points}</p>
+              </div>
+            ) : (
+              <h4>Pas de point, veuillez vous connecter</h4>
+            )}
           </article>
         </section>
         <button

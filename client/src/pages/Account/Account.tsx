@@ -152,7 +152,7 @@ function Account() {
                 </div>
               ))}
               <article className="ensemble">
-                <h4>points:</h4>
+                <h4>Total Points:</h4>
                 <p>{user?.points}</p>
               </article>
             </section>
