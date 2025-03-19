@@ -42,6 +42,7 @@ function PacmanGame() {
   const [timeSpent, setTimeSpent] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [user, setUser] = useState<userProps | null>(null);
+  const [score, setScore] = useState<number>(0);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -61,6 +62,23 @@ function PacmanGame() {
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/score`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        id_game: id_game,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setScore(data);
       });
   }, [token]);
 
@@ -85,8 +103,8 @@ function PacmanGame() {
     if (auth == null) {
       toast.error("Veuillez vous connecter pour enregistrer votre score");
     } else {
-      handlePoints();
       handleScore();
+      handlePoints();
     }
   };
 
@@ -94,9 +112,9 @@ function PacmanGame() {
     try {
       if (user == null) {
         console.error("user is null");
-      } else if (user.points - newScore > newScore) {
+      } else if (score - newScore > newScore) {
         toast.error(
-          "Votre score est inferieur a vos points rejouer et battez votre record!!",
+          "Votre score est inférieur a vos points. Rejouer et battez votre record!!",
         );
         return;
       }
