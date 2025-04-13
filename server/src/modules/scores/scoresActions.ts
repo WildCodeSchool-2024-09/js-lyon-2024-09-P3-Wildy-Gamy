@@ -75,8 +75,9 @@ const editFav: RequestHandler = async (req, res, next) => {
 
 const read: RequestHandler = async (req, res, next) => {
   try {
-    const scoreId = Number(req.body.id_game);
-    const score = await scoresRepository.read(scoreId);
+    const scoreId = Number(req.get("id"));
+    const id_user = Number(req.body.auth.id);
+    const score = await scoresRepository.read(scoreId, id_user);
 
     if (score == null) {
       res.sendStatus(404);
