@@ -71,14 +71,12 @@ function PacmanGame() {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        id: String(id_game),
       },
-      body: JSON.stringify({
-        id_game: id_game,
-      }),
     })
       .then((response) => response.json())
       .then((data) => {
-        setScore(data);
+        setScore(data.score);
       });
   }, [token]);
 
@@ -112,7 +110,7 @@ function PacmanGame() {
     try {
       if (user == null) {
         console.error("user is null");
-      } else if (score - newScore > newScore) {
+      } else if (score > newScore) {
         toast.error(
           "Votre score est inférieur a vos points. Rejouer et battez votre record!!",
         );

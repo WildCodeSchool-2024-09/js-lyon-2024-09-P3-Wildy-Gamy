@@ -11,10 +11,10 @@ type Score = {
 };
 
 class ScoresRepository {
-  async read(id: number) {
+  async read(scoreId: number, id_user: number) {
     const [rows] = await databaseClient.query<Rows>(
-      "select * from scores where id = ?",
-      [id],
+      "select * from scores where id_game = ? and id_user = ?",
+      [scoreId, id_user],
     );
     return rows[0] as Score;
   }
